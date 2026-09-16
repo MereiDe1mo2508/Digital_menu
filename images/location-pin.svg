@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 220">
+  <rect width="300" height="220" fill="#eef3ea"/>
+  <path d="M150 40 C110 40 80 70 80 110 C80 150 150 190 150 190 C150 190 220 150 220 110 C220 70 190 40 150 40 Z" fill="#e3a6b5"/>
+  <circle cx="150" cy="108" r="28" fill="#faf3e8"/>
+  <text x="150" y="205" font-family="Georgia, serif" font-size="16" fill="#4a3728" text-anchor="middle">Astana</text>
+</svg>

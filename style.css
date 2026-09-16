@@ -1,8 +1,14 @@
 :root {
-    --primary-color: aqua;
-    --secondary-color: yellow;
-    --white-color: white;
-    --black-color: black;
+    --primary-color: #e3a6b5;
+    --secondary-color: #8aa17e;
+    --white-color: #faf3e8;
+    --black-color: #4a3728;
+}
+
+body {
+    margin: 0;
+    background-color: var(--white-color);
+    color: var(--black-color);
 }
 #info{
     text-size-adjust: 20px;
@@ -18,9 +24,23 @@
     border-radius: 0%;
 
 }
-#breakfast {
+
+.menu-category {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+}
+
+.category {
+    text-align: center;
+}
+#breakfast,
+.menu-thumb {
     height: 200px;
     width: 250px;
+    object-fit: cover;
     border-radius: 2px;
     border-color: darkgray;
     border-style: solid;
@@ -29,4 +49,169 @@
     text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
+}
+
+/* ==== home page hero photo (Assem) ==== */
+.hero-header {
+    background: linear-gradient(rgba(74, 55, 40, 0.45), rgba(74, 55, 40, 0.45)), url("images/cafe-interior-1.jpg");
+    background-size: cover;
+    background-position: center bottom;
+    min-height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-header #head {
+    color: var(--white-color);
+}
+
+/* ==== navigation (Assem) ==== */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary-color);
+    padding: 15px 0;
+}
+
+.navbar a {
+    color: var(--white-color);
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+}
+
+.navbar a:hover {
+    color: var(--black-color);
+}
+
+/* ==== page sections (Assem) ==== */
+.page-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 15px 40px 15px;
+}
+
+.about-banner {
+    width: 100%;
+    max-width: 800px;
+    display: block;
+    margin: 0 auto 20px auto;
+}
+
+.photo-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.photo-gallery img {
+    flex: 1 1 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(74, 55, 40, 0.25);
+}
+
+.intro-text {
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* ==== team bios (Assem) ==== */
+.team-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin: 25px 0;
+}
+
+.bio-card {
+    background-color: var(--white-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    padding: 20px;
+    width: 260px;
+    text-align: center;
+}
+
+.bio-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+/* ==== hours table (Assem) ==== */
+.hours-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.hours-table th,
+.hours-table td {
+    border: 1px solid var(--secondary-color);
+    padding: 10px;
+    text-align: center;
+}
+
+.hours-table th {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+}
+
+/* ==== reservation form (Assem) ==== */
+.reservation-form {
+    background-color: var(--white-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    padding: 25px;
+    max-width: 450px;
+    margin: 20px auto;
+}
+
+.reservation-form label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+.reservation-form input,
+.reservation-form select,
+.reservation-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+.reservation-form input:focus,
+.reservation-form select:focus,
+.reservation-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.reservation-form button {
+    margin-top: 15px;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.reservation-form button:hover {
+    background-color: var(--secondary-color);
+}
+
+.find-us-list {
+    line-height: 1.8;
 }
