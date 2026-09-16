@@ -1,0 +1,32 @@
+:root {
+    --primary-color: aqua;
+    --secondary-color: yellow;
+    --white-color: white;
+    --black-color: black;
+}
+#info{
+    text-size-adjust: 20px;
+    color:darkgray;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+#feedback {
+    border-radius: 2px;
+    border-color: black;
+}
+.categorysection {
+    display: flex;
+    border-radius: 0%;
+
+}
+#breakfast {
+    height: 200px;
+    width: 250px;
+    border-radius: 2px;
+    border-color: darkgray;
+    border-style: solid;
+}
+#head {
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
