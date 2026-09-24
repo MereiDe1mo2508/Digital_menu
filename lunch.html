@@ -1,65 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Bloom Room Cafe - Digital Menu project -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bloom Room Cafe - Lunch Menu</title>
-    <link rel="stylesheet" href="css/style.css"> </link>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class="menu-header">
-        <h1 id="head">Digital Menu</h1>
-    </header>
-    <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="breakfast.html">Breakfast</a>
-        <a href="lunch.html">Lunch</a>
-        <a href="about.html">About</a>
-    </nav>
-    <main class="page-container">
-        <img src="images/lunch-food.jpg" alt="Bloom Room Cafe lunch dishes" class="menu-thumb">
-        <h2>Lunch menu:</h2>
-        <ul class="list">
-            Soups:
-            <ul>
-                <li>Tomato Soup</li>
-                <li>Mushroom Cream Soup</li>
-                <li>Chicken Noodle Soup</li>
-            </ul>
-            Salads:
-            <ul>
-                <li>Caesar Salad</li>
-                <li>Greek Salad</li>
-                <li>Avocado Salad</li>
-            </ul>
-            Sandwiches & Wraps:
-            <ul>
-                <li>Chicken Wrap</li>
-                <li>Veggie Sandwich</li>
-                <li>Club Sandwich</li>
-            </ul>
-            Mains:
-            <ul>
-                <li>Grilled Chicken with Rice</li>
-                <li>Pasta Primavera</li>
-                <li>Beef Steak</li>
-            </ul>
-            Desserts:
-            <ul>
-                <li>Cheesecake</li>
-                <li>Chocolate Brownie</li>
-                <li>Fruit Tart</li>
-            </ul>
-            Drinks:
-            <ul>
-                <li>Fresh Lemonade</li>
-                <li>Iced Tea</li>
-                <li>Flower Herbal Tea</li>
-            </ul>
-        </ul>
-    </main>
+    <div class="content-layout">
+        <header class="site-header">
+            <h1 id="head">Digital Menu</h1>
+            <nav class="navbar" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="breakfast.html">Breakfast</a>
+                <a href="lunch.html">Lunch</a>
+                <a href="about.html">About</a>
+            </nav>
+        </header>
 
-    <footer id="info">This project made by Merei Sapar and Assem Ozharova</footer>
+        <aside class="page-sidebar">
+            <h2>Lunch Menu</h2>
+            <nav class="sidebar-links" aria-label="Lunch menu sections">
+                <a href="#menu-highlights">Highlights</a>
+                <a href="#soups">Soups</a>
+                <a href="#salads">Salads</a>
+                <a href="#sandwiches">Sandwiches &amp; Wraps</a>
+                <a href="#mains">Main Dishes</a>
+                <a href="#desserts">Desserts</a>
+                <a href="#drinks">Drinks</a>
+            </nav>
+        </aside>
+
+        <main class="page-container">
+            <h2>Lunch Menu</h2>
+            <section class="lunch-card-list" id="menu-highlights" aria-label="Lunch menu highlights">
+                <article class="lunch-card">
+                    <img src="images/lunch-food.jpg" alt="A selection of lunch dishes">
+                    <div class="lunch-card-content">
+                        <h3>Main Dishes</h3>
+                        <p>Choose grilled chicken with rice, pasta primavera, or beef steak.</p>
+                        <a class="card-button" href="#mains">View main dishes</a>
+                    </div>
+                </article>
+                <article class="lunch-card">
+                    <img src="images/lunch-salad-sandwich.jpg" alt="Fresh salad and sandwich served for lunch">
+                    <div class="lunch-card-content">
+                        <h3>Fresh Salads</h3>
+                        <p>Try a Caesar, Greek, or avocado salad made for a fresh lunch.</p>
+                        <a class="card-button" href="#salads">View salads</a>
+                    </div>
+                </article>
+                <article class="lunch-card">
+                    <img src="images/lunch-coffee-dessert.jpg" alt="Coffee and dessert on a cafe table">
+                    <div class="lunch-card-content">
+                        <h3>Desserts</h3>
+                        <p>Finish your meal with cheesecake, chocolate brownie, or fruit tart.</p>
+                        <a class="card-button" href="#desserts">View desserts</a>
+                    </div>
+                </article>
+            </section>
+
+            <section class="menu-list" aria-label="Full lunch menu">
+                <h2>Full Menu</h2>
+
+                <section id="soups">
+                    <h3>Soups</h3>
+                    <ul>
+                        <li>Tomato Soup</li>
+                        <li>Mushroom Cream Soup</li>
+                        <li>Chicken Noodle Soup</li>
+                    </ul>
+                </section>
+
+                <section id="salads">
+                    <h3>Salads</h3>
+                    <ul>
+                        <li>Caesar Salad</li>
+                        <li>Greek Salad</li>
+                        <li>Avocado Salad</li>
+                    </ul>
+                </section>
+
+                <section id="sandwiches">
+                    <h3>Sandwiches &amp; Wraps</h3>
+                    <ul>
+                        <li>Chicken Wrap</li>
+                        <li>Veggie Sandwich</li>
+                        <li>Club Sandwich</li>
+                    </ul>
+                </section>
+
+                <section id="mains">
+                    <h3>Main Dishes</h3>
+                    <ul>
+                        <li>Grilled Chicken with Rice</li>
+                        <li>Pasta Primavera</li>
+                        <li>Beef Steak</li>
+                    </ul>
+                </section>
+
+                <section id="desserts">
+                    <h3>Desserts</h3>
+                    <ul>
+                        <li>Cheesecake</li>
+                        <li>Chocolate Brownie</li>
+                        <li>Fruit Tart</li>
+                    </ul>
+                </section>
+
+                <section id="drinks">
+                    <h3>Drinks</h3>
+                    <ul>
+                        <li>Fresh Lemonade</li>
+                        <li>Iced Tea</li>
+                        <li>Flower Herbal Tea</li>
+                    </ul>
+                </section>
+            </section>
+        </main>
+
+        <footer id="info">This project made by Merei Sapar and Assem Ozharova</footer>
+    </div>
 </body>
 </html>

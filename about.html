@@ -1,113 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Bloom Room Cafe - Digital Menu project -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bloom Room Cafe - About Us</title>
-    <link rel="stylesheet" href="css/style.css"> </link>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class="menu-header">
-        <h1 id="head">Digital Menu</h1>
-    </header>
-    <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="breakfast.html">Breakfast</a>
-        <a href="lunch.html">Lunch</a>
-        <a href="about.html">About</a>
-    </nav>
+    <div class="content-layout">
+        <header class="site-header">
+            <h1 id="head">Digital Menu</h1>
+            <nav class="navbar" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="breakfast.html">Breakfast</a>
+                <a href="lunch.html">Lunch</a>
+                <a href="about.html">About</a>
+            </nav>
+        </header>
 
-    <main class="page-container">
-        <div class="photo-gallery">
-            <img src="images/cafe-interior-1.jpg" alt="Bloom Room Cafe entrance with pink and yellow flower ceiling">
-            <img src="images/cafe-interior-2.jpg" alt="Bloom Room Cafe flower wall with chandeliers">
-            <img src="images/cafe-interior-3.jpg" alt="Bloom Room Cafe seating area with red chairs">
-        </div>
+        <aside class="page-sidebar">
+            <h2>On this page</h2>
+            <nav class="sidebar-links" aria-label="About page sections">
+                <a href="#story">Our cafe</a>
+                <a href="#gallery">Photo gallery</a>
+                <a href="#team">Our team</a>
+                <a href="#hours">Opening hours</a>
+                <a href="#visit">Visit us</a>
+                <a href="#booking">Book a table</a>
+            </nav>
+        </aside>
 
-        <h2>About Bloom Room Cafe</h2>
-        <p class="intro-text">
-            Bloom Room Cafe is a cozy little spot in Astana where every table is decorated
-            with fresh flowers. We serve breakfast, coffee, and desserts in a bright,
-            flower-filled space that feels like a small garden in the city.
-        </p>
+        <main class="page-container">
+            <section id="gallery">
+                <h2>Photo Gallery</h2>
+                <div class="about-gallery">
+                    <figure class="gallery-item">
+                        <img src="images/cafe-interior-1.jpg" alt="Bloom Room Cafe entrance with a flower ceiling">
+                        <figcaption>Welcome to Bloom Room Cafe</figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="images/cafe-interior-2.jpg" alt="Cafe wall decorated with flowers and chandeliers">
+                        <figcaption>Flowers and warm lights</figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="images/cafe-interior-3.jpg" alt="Cafe seating area with red chairs">
+                        <figcaption>A cozy place to meet</figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="images/gallery-cafe-plants.jpg" alt="Bright cafe with green plants and wooden tables">
+                        <figcaption>A bright, leafy cafe</figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="images/gallery-floral-cafe.jpg" alt="Pink cafe interior decorated with flowers">
+                        <figcaption>Colorful floral details</figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="images/gallery-warm-interior.jpg" alt="Cafe interior with plants and warm lighting">
+                        <figcaption>Warm cafe lighting</figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="images/lunch-food.jpg" alt="A selection of lunch dishes served at the cafe">
+                        <figcaption>Fresh lunch dishes</figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="images/lunch-salad-sandwich.jpg" alt="Fresh salad and sandwich on a table">
+                        <figcaption>Fresh salads and sandwiches</figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="images/lunch-coffee-dessert.jpg" alt="Coffee and dessert served in a cafe">
+                        <figcaption>Coffee and something sweet</figcaption>
+                    </figure>
+                </div>
+            </section>
 
-        <h2>About the Team Members</h2>
-        <section class="team-section">
-            <div class="bio-card">
-                <img src="images/avatar-assem.svg" alt="Photo of Assem Ozharova" class="bio-photo">
-                <h3>Assem Ozharova</h3>
-                <p>Made the Lunch and About pages of this project.</p>
-            </div>
-            <div class="bio-card">
-                <img src="images/avatar-merei.svg" alt="Photo of Merei Sapar" class="bio-photo">
-                <h3>Merei Sapar</h3>
-                <p>Made the Home and Breakfast Menu pages of this project.</p>
-            </div>
-        </section>
+            <section id="story">
+                <h2>About Bloom Room Cafe</h2>
+                <p class="intro-text">
+                    Bloom Room Cafe is a cozy little spot in Astana where every table is decorated
+                    with fresh flowers. We serve breakfast, coffee, and desserts in a bright,
+                    flower-filled space that feels like a small garden in the city.
+                </p>
+            </section>
 
-        <h2>Opening Hours</h2>
-        <table class="hours-table">
-            <tr>
-                <th>Day</th>
-                <th>Opening</th>
-                <th>Closing</th>
-            </tr>
-            <tr>
-                <td>Monday - Friday</td>
-                <td>08:00</td>
-                <td>21:00</td>
-            </tr>
-            <tr>
-                <td>Saturday</td>
-                <td>09:00</td>
-                <td>22:00</td>
-            </tr>
-            <tr>
-                <td>Sunday</td>
-                <td>09:00</td>
-                <td>20:00</td>
-            </tr>
-        </table>
+            <section id="team">
+                <h2>About the Team Members</h2>
+                <div class="team-section">
+                    <div class="bio-card">
+                        <img src="images/avatar-assem.svg" alt="Photo of Assem Ozharova" class="bio-photo">
+                        <h3>Assem Ozharova</h3>
+                        <p>Made the Lunch and About pages of this project.</p>
+                    </div>
+                    <div class="bio-card">
+                        <img src="images/avatar-merei.svg" alt="Photo of Merei Sapar" class="bio-photo">
+                        <h3>Merei Sapar</h3>
+                        <p>Made the Home and Breakfast Menu pages of this project.</p>
+                    </div>
+                </div>
+            </section>
 
-        <h2>Why people love us</h2>
-        <ul>
-            <li>Fresh flowers on every table</li>
-            <li>Specialty coffee and homemade pastries</li>
-            <li>Cozy and bright interior</li>
-            <li>Friendly staff</li>
-        </ul>
+            <section id="hours">
+                <h2>Opening Hours</h2>
+                <table class="hours-table">
+                    <tr>
+                        <th>Day</th>
+                        <th>Opening</th>
+                        <th>Closing</th>
+                    </tr>
+                    <tr>
+                        <td>Monday - Friday</td>
+                        <td>08:00</td>
+                        <td>21:00</td>
+                    </tr>
+                    <tr>
+                        <td>Saturday</td>
+                        <td>09:00</td>
+                        <td>22:00</td>
+                    </tr>
+                    <tr>
+                        <td>Sunday</td>
+                        <td>09:00</td>
+                        <td>20:00</td>
+                    </tr>
+                </table>
+            </section>
 
-        <h2>Visit Us</h2>
-        <img src="images/location-pin.svg" alt="Bloom Room Cafe location in Astana" class="about-banner" style="max-width:250px;">
-        <ol class="find-us-list">
-            <li>We are located in Astana city center.</li>
-            <li>Look for the cafe with flowers in the windows.</li>
-            <li>Parking is available right next to the entrance.</li>
-        </ol>
+            <section id="visit">
+                <h2>Why People Love Us</h2>
+                <ul>
+                    <li>Fresh flowers on every table</li>
+                    <li>Specialty coffee and homemade pastries</li>
+                    <li>Cozy and bright interior</li>
+                    <li>Friendly staff</li>
+                </ul>
 
-        <h2>Book a table</h2>
-        <form class="reservation-form" id="contact-form">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Your name" required>
+                <h2>Visit Us</h2>
+                <img src="images/location-pin.svg" alt="Bloom Room Cafe location in Astana" class="about-banner location-image">
+                <ol class="find-us-list">
+                    <li>We are located in Astana city center.</li>
+                    <li>Look for the cafe with flowers in the windows.</li>
+                    <li>Parking is available right next to the entrance.</li>
+                </ol>
+            </section>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            <section id="booking">
+                <h2>Book a Table</h2>
+                <form class="reservation-form" id="contact-form">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your name" required>
 
-            <label for="time">Preferred time</label>
-            <select id="time" name="time">
-                <option value="morning">Morning (08:00 - 11:00)</option>
-                <option value="afternoon">Afternoon (12:00 - 16:00)</option>
-                <option value="evening">Evening (17:00 - 21:00)</option>
-            </select>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
 
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="4" placeholder="Number of guests, special requests..."></textarea>
+                    <label for="time">Preferred time</label>
+                    <select id="time" name="time">
+                        <option value="morning">Morning (08:00 - 11:00)</option>
+                        <option value="afternoon">Afternoon (12:00 - 16:00)</option>
+                        <option value="evening">Evening (17:00 - 21:00)</option>
+                    </select>
 
-            <button type="submit">Send Request</button>
-        </form>
-    </main>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Number of guests, special requests..."></textarea>
 
-    <footer id="info">This project made by Merei Sapar and Assem Ozharova</footer>
+                    <button type="submit">Send Request</button>
+                </form>
+            </section>
+        </main>
+
+        <footer id="info">This project made by Merei Sapar and Assem Ozharova</footer>
+    </div>
 </body>
 </html>
