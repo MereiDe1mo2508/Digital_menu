@@ -1,83 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Bloom Room Cafe - Digital Menu project -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bloom Room Cafe - Breakfast Menu</title>
-    <link rel="stylesheet" href="css/style.css"> </link>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class="menu-header">
-        <h1 id="head">Digital Menu</h1>
-    </header>
-    <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="breakfast.html">Breakfast</a>
-        <a href="lunch.html">Lunch</a>
-        <a href="about.html">About</a>
-    </nav>
-    <main class="page-container">
-        <img src="images/fruits-baked-bread-croissant-white-background.jpg" alt="Fresh breakfast pastries" class="menu-thumb">
-        <h2>Breakfast menu:</h2>
-        <ul class="list">
-            Omelette:
-            <ul>
-                <li>Bacon and Cheese</li>
-                <li>Cheese</li>
-                <li>Baked Ham</li>
-                <li>Tomato</li>
-                <li>Veggie</li>
-            </ul>
-            Pancakes:
-            <ul>
-                <li>Blueberry</li>
-                <li>Strawerry</li>
-                <li>Butter and Syrup</li>
-                <li>Banana</li>
-                <li>Chocolate</li>
-            </ul>
-            Sandwich:
-            <ul>
-                <li>Grilled Sandwich</li>
-                <li>Cheesy Grilled Sandwich</li>
-                <li>Fruit Sandwich</li>
-            </ul>
-            Coffee:
-            <ul>
-                <li>Cappuccino</li>
-                <li>Americano</li>
-                <li>Latte</li>
-                <li>Irish Coffee</li>
-                <li>Mexican Coffee</li>
-            </ul>
-            Waffles:
-            <ul>
-                <li>Chocolate Waffle</li>
-                <li>Syrup Waffle</li>
-                <li>Toasted Waffle</li>
-                <li>Potato Waffle</li>
-                <li>Belgian Waffle</li>
-                <li>Soft Waffle</li>
-            </ul>
-            Bakery:
-            <ul>
-                <li>Freshly-baked Bread</li>
-            </ul>
-            Tea & juice:
-            <ul>
-                <li>Orange Juice</li>
-                <li>Mango Juice</li>
-                <li>Lemon Juice</li>
-                <li>Apple Juice</li>
-                <li>Green Tea</li>
-                <li>Black Tea</li>
-                <li>Tea with Milk</li>
-                <li>Lemon Tea</li>
-            </ul>
-        </ul>
-    </main>
+    <div class="content-layout">
+        <header class="site-header">
+            <h1 id="head">Digital Menu</h1>
+            <nav class="navbar" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="breakfast.html">Breakfast</a>
+                <a href="lunch.html">Lunch</a>
+                <a href="about.html">About</a>
+            </nav>
+        </header>
 
-    <footer id="info">This project made by Merei Sapar and Assem Ozharova</footer>
+        <aside class="page-sidebar">
+            <h2>Breakfast Menu</h2>
+            <nav class="sidebar-links" aria-label="Breakfast menu sections">
+                <a href="#menu-highlights">Highlights</a>
+                <a href="#omelettes">Omelettes</a>
+                <a href="#pancakes">Pancakes</a>
+                <a href="#sandwiches">Sandwiches</a>
+                <a href="#coffees">Coffees</a>
+                <a href="#waffles">Waffles</a>
+                <a href="#tea-juices">Tea and Juices</a>
+            </nav>
+        </aside>
+
+        <main class="page-container">
+            <h2>Breakfast Menu</h2>
+            <section class="breakfast-card-list" id="menu-highlights" aria-label="Breakfast menu highlights">
+                <article class="breakfast-card">
+                    <img src="images/breakfast-omelette.jpg" alt="Cheese and vegetable omelette">
+                    <div class="breakfast-card-content">
+                        <h3>Omelettes</h3>
+                        <p>Choose from our selection of fluffy omelettes filled with fresh ingredients.</p>
+                        <a class="card-button" href="#omelettes">View omelettes</a>
+                    </div>
+                </article>
+                <article class="breakfast-card">
+                    <img src="images/breakfast-grilled-cheese.jpg" alt="Fresh grilled cheese sandwich">
+                    <div class="breakfast-card-content">
+                        <h3>Sandwiches</h3>
+                        <p>Try one of our delicious grilled and fresh sandwiches.</p>
+                        <a class="card-button" href="#sandwiches">View sandwiches</a>
+                    </div>
+                </article>
+                <article class="breakfast-card">
+                    <img src="images/breakfast-coffee.jpg" alt="Coffee served on a cafe table">
+                    <div class="breakfast-card-content">
+                        <h3>Coffees</h3>
+                        <p>Start your day with a rich, aromatic coffee or try our seasonal speciality.</p>
+                        <a class="card-button" href="#coffees">View coffees</a>
+                    </div>
+                </article>
+            </section>
+
+            <section class="menu-list" aria-label="Full breakfast menu">
+                <h2>Full Menu</h2>
+
+                <section id="omelettes">
+                    <h3>Omelettes</h3>
+                    <ul>
+                        <li>Bacon and Cheese Omelette</li>
+                        <li>Cheese Omelette</li>
+                        <li>Baked Ham Omelette</li>
+                        <li>Tomato Omelette</li>
+                        <li>Veggie Omelette</li>
+                    </ul>
+                </section>
+
+                <section id="pancakes">
+                    <h3>Pancakes</h3>
+                    <ul>
+                        <li>Blueberry Pancake</li>
+                        <li>Strawberry Pancake</li>
+                        <li>Butter and Syrup Pancake</li>
+                        <li>Banana Pancake</li>
+                        <li>Chocolate Pancake</li>
+                    </ul>
+                </section>
+
+                <section id="sandwiches">
+                    <h3>Sandwiches</h3>
+                    <ul>
+                        <li>Grilled Sandwich</li>
+                        <li>Cheesy Grilled Sandwich</li>
+                        <li>Fruit Sandwich</li>
+                    </ul>
+                </section>
+
+                <section id="coffees">
+                    <h3>Coffees</h3>
+                    <ul>
+                        <li>Cappuccino Coffee</li>
+                        <li>Americano Coffee</li>
+                        <li>Latte Coffee</li>
+                        <li>Irish Coffee</li>
+                        <li>Mexican Coffee</li>
+                    </ul>
+                </section>
+
+                <section id="waffles">
+                    <h3>Waffles</h3>
+                    <ul>
+                        <li>Chocolate Waffle</li>
+                        <li>Syrup Waffle</li>
+                        <li>Toasted Waffle</li>
+                        <li>Potato Waffle</li>
+                        <li>Belgian Waffle</li>
+                        <li>Soft Waffle</li>
+                    </ul>
+                </section>
+
+                <section id="tea-juices">
+                    <h3>Tea and Juices</h3>
+                    <ul>
+                        <li>Orange Juice</li>
+                        <li>Mango Juice</li>
+                        <li>Lemon Juice</li>
+                        <li>Apple Juice</li>
+                        <li>Green Tea</li>
+                        <li>Black Tea</li>
+                        <li>Tea with Milk</li>
+                        <li>Lemon Tea</li>
+                    </ul>
+                </section>
+            </section>
+        </main>
+
+        <footer id="info">This project made by Merei Sapar and Assem Ozharova</footer>
+    </div>
 </body>
 </html>

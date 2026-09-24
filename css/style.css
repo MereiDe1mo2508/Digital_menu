@@ -419,6 +419,53 @@ a:hover {
     margin: 0 0 16px;
 }
 
+.breakfast-card-list {
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+    margin: 20px 0 36px;
+}
+
+.breakfast-card {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(138, 161, 126, 0.6);
+    border-radius: 8px;
+    background-color: #fffaf2;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.breakfast-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(74, 55, 40, 0.2);
+}
+
+.breakfast-card > img {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.breakfast-card-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px;
+}
+
+.breakfast-card-content h3 {
+    margin: 0 0 8px;
+}
+
+.breakfast-card-content p {
+    margin: 0 0 16px;
+}
+
 .card-button {
     margin-top: auto;
     padding: 8px 14px;
@@ -487,6 +534,14 @@ a:hover {
     .lunch-card {
         flex-basis: calc(50% - 10px);
     }
+
+    .breakfast-card-list {
+        flex-wrap: wrap;
+    }
+
+    .breakfast-card {
+        flex-basis: calc(50% - 10px);
+    }
 }
 
 @media (max-width: 480px) {
@@ -499,6 +554,14 @@ a:hover {
     }
 
     .lunch-card {
+        flex-basis: auto;
+    }
+
+    .breakfast-card-list {
+        flex-direction: column;
+    }
+
+    .breakfast-card {
         flex-basis: auto;
     }
 
