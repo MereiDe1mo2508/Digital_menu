@@ -4,122 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bloom Room Cafe - Lunch Menu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <div class="content-layout">
-        <header class="site-header">
-            <h1 id="head">Digital Menu</h1>
-            <nav class="navbar" aria-label="Main navigation">
-                <a href="index.html">Home</a>
-                <a href="breakfast.html">Breakfast</a>
-                <a href="lunch.html">Lunch</a>
-                <a href="about.html">About</a>
-            </nav>
-        </header>
+<body class="d-flex flex-column">
+    <nav class="navbar navbar-expand-lg navbar-dark site-navbar" aria-label="Main navigation">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">Digital Menu</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mainNavigation" aria-controls="mainNavigation"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNavigation">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="breakfast.html">Breakfast</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="lunch.html">Lunch</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-        <aside class="page-sidebar">
-            <h2>Lunch Menu</h2>
-            <nav class="sidebar-links" aria-label="Lunch menu sections">
-                <a href="#menu-highlights">Highlights</a>
-                <a href="#soups">Soups</a>
-                <a href="#salads">Salads</a>
-                <a href="#sandwiches">Sandwiches &amp; Wraps</a>
-                <a href="#mains">Main Dishes</a>
-                <a href="#desserts">Desserts</a>
-                <a href="#drinks">Drinks</a>
-            </nav>
-        </aside>
+    <main class="container-fluid flex-grow-1 py-4">
+        <div class="row g-4">
+            <aside class="col-lg-3 page-sidebar p-4">
+                <h1 class="h2">Lunch Menu</h1>
+                <nav class="sidebar-links gap-3" aria-label="Lunch menu sections">
+                    <a href="#menu-highlights">Highlights</a>
+                    <a href="#soups">Soups</a>
+                    <a href="#salads">Salads</a>
+                    <a href="#sandwiches">Sandwiches and Wraps</a>
+                    <a href="#mains">Main Dishes</a>
+                    <a href="#desserts">Desserts</a>
+                    <a href="#drinks">Drinks</a>
+                </nav>
+            </aside>
 
-        <main class="page-container">
-            <h2>Lunch Menu</h2>
-            <section class="lunch-card-list" id="menu-highlights" aria-label="Lunch menu highlights">
-                <article class="lunch-card">
-                    <img src="images/lunch-food.jpg" alt="A selection of lunch dishes">
-                    <div class="lunch-card-content">
-                        <h3>Main Dishes</h3>
-                        <p>Choose grilled chicken with rice, pasta primavera, or beef steak.</p>
-                        <a class="card-button" href="#mains">View main dishes</a>
+            <div class="col-lg-9">
+                <section id="menu-highlights" aria-labelledby="lunch-title">
+                    <h2 id="lunch-title" class="mb-4">Lunch Menu</h2>
+                    <div class="row g-4">
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <article class="card menu-card">
+                                <img src="images/lunch-food.jpg" class="card-img-top"
+                                     alt="A selection of lunch dishes">
+                                <div class="card-body d-flex flex-column p-4">
+                                    <h3 class="card-title h4">Main Dishes</h3>
+                                    <p class="card-text">Choose grilled chicken with rice, pasta primavera, or beef steak.</p>
+                                    <a class="btn btn-primary mt-auto align-self-start" href="#mains">View main dishes</a>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <article class="card menu-card">
+                                <img src="images/lunch-salad-sandwich.jpg" class="card-img-top"
+                                     alt="Fresh salad and sandwich served for lunch">
+                                <div class="card-body d-flex flex-column p-4">
+                                    <h3 class="card-title h4">Fresh Salads</h3>
+                                    <p class="card-text">Try a Caesar, Greek, or avocado salad made for a fresh lunch.</p>
+                                    <a class="btn btn-primary mt-auto align-self-start" href="#salads">View salads</a>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <article class="card menu-card">
+                                <img src="images/lunch-coffee-dessert.jpg" class="card-img-top"
+                                     alt="Coffee and dessert on a cafe table">
+                                <div class="card-body d-flex flex-column p-4">
+                                    <h3 class="card-title h4">Desserts</h3>
+                                    <p class="card-text">Finish your meal with cheesecake, chocolate brownie, or fruit tart.</p>
+                                    <a class="btn btn-primary mt-auto align-self-start" href="#desserts">View desserts</a>
+                                </div>
+                            </article>
+                        </div>
                     </div>
-                </article>
-                <article class="lunch-card">
-                    <img src="images/lunch-salad-sandwich.jpg" alt="Fresh salad and sandwich served for lunch">
-                    <div class="lunch-card-content">
-                        <h3>Fresh Salads</h3>
-                        <p>Try a Caesar, Greek, or avocado salad made for a fresh lunch.</p>
-                        <a class="card-button" href="#salads">View salads</a>
+                </section>
+
+                <section class="mt-5" aria-label="Full lunch menu">
+                    <h2 class="mb-4">Full Menu</h2>
+                    <div class="row g-4">
+                        <section class="col-md-6" id="soups">
+                            <h3 class="h4">Soups</h3>
+                            <ul>
+                                <li>Tomato Soup</li>
+                                <li>Mushroom Cream Soup</li>
+                                <li>Chicken Noodle Soup</li>
+                            </ul>
+                        </section>
+                        <section class="col-md-6" id="salads">
+                            <h3 class="h4">Salads</h3>
+                            <ul>
+                                <li>Caesar Salad</li>
+                                <li>Greek Salad</li>
+                                <li>Avocado Salad</li>
+                            </ul>
+                        </section>
+                        <section class="col-md-6" id="sandwiches">
+                            <h3 class="h4">Sandwiches and Wraps</h3>
+                            <ul>
+                                <li>Chicken Wrap</li>
+                                <li>Veggie Sandwich</li>
+                                <li>Club Sandwich</li>
+                            </ul>
+                        </section>
+                        <section class="col-md-6" id="mains">
+                            <h3 class="h4">Main Dishes</h3>
+                            <ul>
+                                <li>Grilled Chicken with Rice</li>
+                                <li>Pasta Primavera</li>
+                                <li>Beef Steak</li>
+                            </ul>
+                        </section>
+                        <section class="col-md-6" id="desserts">
+                            <h3 class="h4">Desserts</h3>
+                            <ul>
+                                <li>Cheesecake</li>
+                                <li>Chocolate Brownie</li>
+                                <li>Fruit Tart</li>
+                            </ul>
+                        </section>
+                        <section class="col-md-6" id="drinks">
+                            <h3 class="h4">Drinks</h3>
+                            <ul>
+                                <li>Fresh Lemonade</li>
+                                <li>Iced Tea</li>
+                                <li>Flower Herbal Tea</li>
+                            </ul>
+                        </section>
                     </div>
-                </article>
-                <article class="lunch-card">
-                    <img src="images/lunch-coffee-dessert.jpg" alt="Coffee and dessert on a cafe table">
-                    <div class="lunch-card-content">
-                        <h3>Desserts</h3>
-                        <p>Finish your meal with cheesecake, chocolate brownie, or fruit tart.</p>
-                        <a class="card-button" href="#desserts">View desserts</a>
-                    </div>
-                </article>
-            </section>
-
-            <section class="menu-list" aria-label="Full lunch menu">
-                <h2>Full Menu</h2>
-
-                <section id="soups">
-                    <h3>Soups</h3>
-                    <ul>
-                        <li>Tomato Soup</li>
-                        <li>Mushroom Cream Soup</li>
-                        <li>Chicken Noodle Soup</li>
-                    </ul>
                 </section>
+            </div>
+        </div>
+    </main>
 
-                <section id="salads">
-                    <h3>Salads</h3>
-                    <ul>
-                        <li>Caesar Salad</li>
-                        <li>Greek Salad</li>
-                        <li>Avocado Salad</li>
-                    </ul>
-                </section>
+    <footer class="footer py-3 text-center">
+        <div class="container">
+            This project was made by Merei Sapar and Assem Ozharova.
+        </div>
+    </footer>
 
-                <section id="sandwiches">
-                    <h3>Sandwiches &amp; Wraps</h3>
-                    <ul>
-                        <li>Chicken Wrap</li>
-                        <li>Veggie Sandwich</li>
-                        <li>Club Sandwich</li>
-                    </ul>
-                </section>
-
-                <section id="mains">
-                    <h3>Main Dishes</h3>
-                    <ul>
-                        <li>Grilled Chicken with Rice</li>
-                        <li>Pasta Primavera</li>
-                        <li>Beef Steak</li>
-                    </ul>
-                </section>
-
-                <section id="desserts">
-                    <h3>Desserts</h3>
-                    <ul>
-                        <li>Cheesecake</li>
-                        <li>Chocolate Brownie</li>
-                        <li>Fruit Tart</li>
-                    </ul>
-                </section>
-
-                <section id="drinks">
-                    <h3>Drinks</h3>
-                    <ul>
-                        <li>Fresh Lemonade</li>
-                        <li>Iced Tea</li>
-                        <li>Flower Herbal Tea</li>
-                    </ul>
-                </section>
-            </section>
-        </main>
-
-        <footer id="info">This project made by Merei Sapar and Assem Ozharova</footer>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
