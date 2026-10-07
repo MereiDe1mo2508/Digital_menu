@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="d-flex flex-column">
-    <nav class="navbar navbar-expand-lg navbar-dark site-navbar" aria-label="Main navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" aria-label="Main navigation">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">Digital Menu</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -29,19 +29,19 @@
 
     <main class="container-fluid flex-grow-1 py-4">
         <div class="row g-4">
-            <aside class="col-lg-3 page-sidebar p-4">
+            <aside class="col-md-3 border-end bg-body-secondary p-4">
                 <h1 class="h2">About Us</h1>
-                <nav class="sidebar-links gap-3" aria-label="About page sections">
-                    <a href="#story">Our Cafe</a>
-                    <a href="#gallery">Photo Gallery</a>
-                    <a href="#team">Our Team</a>
-                    <a href="#hours">Opening Hours</a>
-                    <a href="#visit">Visit Us</a>
-                    <a href="#booking">Book a Table</a>
+                <nav class="d-flex flex-column gap-3" aria-label="About page sections">
+                    <a class="link-dark text-decoration-none" href="#story">Our Cafe</a>
+                    <a class="link-dark text-decoration-none" href="#gallery">Photo Gallery</a>
+                    <a class="link-dark text-decoration-none" href="#team">Our Team</a>
+                    <a class="link-dark text-decoration-none" href="#hours">Opening Hours</a>
+                    <a class="link-dark text-decoration-none" href="#visit">Visit Us</a>
+                    <a class="link-dark text-decoration-none" href="#booking">Book a Table</a>
                 </nav>
             </aside>
 
-            <div class="col-lg-9">
+            <div class="col-md-9">
                 <section id="gallery" aria-labelledby="gallery-title">
                     <h2 id="gallery-title" class="mb-4">Photo Gallery</h2>
                     <div id="cafeCarousel" class="carousel slide about-gallery" data-bs-ride="carousel">
@@ -59,39 +59,57 @@
                         </div>
                         <div class="carousel-inner rounded shadow">
                             <div class="carousel-item active">
-                                <img src="images/cafe-interior-1.jpg" class="d-block w-100" alt="Bloom Room Cafe entrance with a flower ceiling">
+                                <div class="ratio ratio-4x3">
+                                    <img src="images/cafe-interior-1.jpg" class="d-block w-100 object-fit-cover" alt="Bloom Room Cafe entrance with a flower ceiling">
+                                </div>
                                 <div class="carousel-caption d-none d-md-block"><p>Welcome to Bloom Room Cafe</p></div>
                             </div>
                             <div class="carousel-item">
-                                <img src="images/cafe-interior-2.jpg" class="d-block w-100" alt="Cafe wall decorated with flowers and chandeliers">
+                                <div class="ratio ratio-4x3">
+                                    <img src="images/cafe-interior-2.jpg" class="d-block w-100 object-fit-cover" alt="Cafe wall decorated with flowers and chandeliers">
+                                </div>
                                 <div class="carousel-caption d-none d-md-block"><p>Flowers and warm lights</p></div>
                             </div>
                             <div class="carousel-item">
-                                <img src="images/cafe-interior-3.jpg" class="d-block w-100" alt="Cafe seating area with red chairs">
+                                <div class="ratio ratio-4x3">
+                                    <img src="images/cafe-interior-3.jpg" class="d-block w-100 object-fit-cover" alt="Cafe seating area with red chairs">
+                                </div>
                                 <div class="carousel-caption d-none d-md-block"><p>A cozy place to meet</p></div>
                             </div>
                             <div class="carousel-item">
-                                <img src="images/gallery-cafe-plants.jpg" class="d-block w-100" alt="Bright cafe with green plants and wooden tables">
+                                <div class="ratio ratio-4x3">
+                                    <img src="images/gallery-cafe-plants.jpg" class="d-block w-100 object-fit-cover" alt="Bright cafe with green plants and wooden tables">
+                                </div>
                                 <div class="carousel-caption d-none d-md-block"><p>A bright, leafy cafe</p></div>
                             </div>
                             <div class="carousel-item">
-                                <img src="images/gallery-floral-cafe.jpg" class="d-block w-100" alt="Pink cafe interior decorated with flowers">
+                                <div class="ratio ratio-4x3">
+                                    <img src="images/gallery-floral-cafe.jpg" class="d-block w-100 object-fit-cover" alt="Pink cafe interior decorated with flowers">
+                                </div>
                                 <div class="carousel-caption d-none d-md-block"><p>Colorful floral details</p></div>
                             </div>
                             <div class="carousel-item">
-                                <img src="images/gallery-warm-interior.jpg" class="d-block w-100" alt="Cafe interior with plants and warm lighting">
+                                <div class="ratio ratio-4x3">
+                                    <img src="images/gallery-warm-interior.jpg" class="d-block w-100 object-fit-cover" alt="Cafe interior with plants and warm lighting">
+                                </div>
                                 <div class="carousel-caption d-none d-md-block"><p>Warm cafe lighting</p></div>
                             </div>
                             <div class="carousel-item">
-                                <img src="images/lunch-food.jpg" class="d-block w-100" alt="A selection of lunch dishes">
+                                <div class="ratio ratio-4x3">
+                                    <img src="images/lunch-food.jpg" class="d-block w-100 object-fit-cover" alt="A selection of lunch dishes">
+                                </div>
                                 <div class="carousel-caption d-none d-md-block"><p>Fresh lunch dishes</p></div>
                             </div>
                             <div class="carousel-item">
-                                <img src="images/lunch-salad-sandwich.jpg" class="d-block w-100" alt="Fresh salad and sandwich">
+                                <div class="ratio ratio-4x3">
+                                    <img src="images/lunch-salad-sandwich.jpg" class="d-block w-100 object-fit-cover" alt="Fresh salad and sandwich">
+                                </div>
                                 <div class="carousel-caption d-none d-md-block"><p>Fresh salads and sandwiches</p></div>
                             </div>
                             <div class="carousel-item">
-                                <img src="images/lunch-coffee-dessert.jpg" class="d-block w-100" alt="Coffee and dessert">
+                                <div class="ratio ratio-4x3">
+                                    <img src="images/lunch-coffee-dessert.jpg" class="d-block w-100 object-fit-cover" alt="Coffee and dessert">
+                                </div>
                                 <div class="carousel-caption d-none d-md-block"><p>Coffee and something sweet</p></div>
                             </div>
                         </div>
@@ -189,8 +207,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" id="email" name="email" class="form-control"
-                                   placeholder="you@example.com" required>
+                            <div class="input-group">
+                                <span class="input-group-text">@</span>
+                                <input type="email" id="email" name="email" class="form-control"
+                                       placeholder="you@example.com" required>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="time" class="form-label">Preferred time</label>
@@ -205,14 +226,14 @@
                             <textarea id="message" name="message" class="form-control"
                                       rows="4" placeholder="Number of guests, special requests..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Request</button>
+                        <button type="submit" class="btn btn-danger btn-lg">Send Request</button>
                     </form>
                 </section>
             </div>
         </div>
     </main>
 
-    <footer class="footer py-3 text-center">
+    <footer class="bg-dark py-3 text-center text-white">
         <div class="container">
             This project was made by Merei Sapar and Assem Ozharova.
         </div>

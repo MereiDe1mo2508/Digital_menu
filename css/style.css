@@ -17,20 +17,6 @@ main {
     flex: 1;
 }
 
-.site-navbar {
-    background-color: var(--primary-color);
-}
-
-.site-navbar .navbar-brand,
-.site-navbar .nav-link {
-    color: var(--cream-color);
-}
-
-.site-navbar .nav-link:hover,
-.site-navbar .nav-link:focus {
-    color: var(--brown-color);
-}
-
 .hero-section {
     min-height: 360px;
     background:
@@ -54,6 +40,7 @@ main {
 
 .feature-card-group {
     display: flex;
+    gap: 1.5rem;
 }
 
 .feature-card {
@@ -66,8 +53,7 @@ main {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.feature-card:hover,
-.menu-card:hover {
+.feature-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 6px 14px rgba(74, 55, 40, 0.2);
 }
@@ -85,46 +71,13 @@ main {
     flex-direction: column;
 }
 
+.feature-card-content p {
+    margin-bottom: 1.5rem;
+}
+
 .feature-card-content .btn {
     margin-top: auto;
     align-self: flex-start;
-}
-
-.page-sidebar {
-    border-right: 1px solid rgba(138, 161, 126, 0.6);
-    background-color: rgba(138, 161, 126, 0.12);
-}
-
-.sidebar-links {
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar-links a {
-    color: var(--brown-color);
-    text-decoration: none;
-}
-
-.sidebar-links a:hover {
-    color: var(--primary-color);
-}
-
-.menu-card {
-    height: 100%;
-    border: 1px solid rgba(138, 161, 126, 0.6);
-    background-color: #fffaf2;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.menu-card img {
-    height: 180px;
-    object-fit: cover;
-}
-
-.about-gallery .carousel-item img {
-    width: 100%;
-    height: min(60vh, 520px);
-    object-fit: cover;
 }
 
 .about-gallery .carousel-caption {
@@ -155,11 +108,6 @@ main {
 
 .reservation-form {
     max-width: 560px;
-}
-
-.footer {
-    background-color: var(--brown-color);
-    color: var(--cream-color);
 }
 
 @media (max-width: 991.98px) {
@@ -205,7 +153,4 @@ main {
         flex-basis: auto;
     }
 
-    .about-gallery .carousel-item img {
-        height: 300px;
-    }
 }
