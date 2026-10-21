@@ -5,7 +5,6 @@ const overlay = document.querySelector("#popup-overlay");
 
 function openPopup(popup) {
     if (!popup || !overlay) return;
-
     popup.classList.add("active");
     overlay.classList.add("active");
 }
@@ -23,6 +22,37 @@ subscriptionButtons.forEach(button => {
     button.addEventListener("click", () => {
         const popup = document.querySelector(button.dataset.subscriptionTarget);
         openPopup(popup);
+        const form = document.getElementById("subscription-form");
+
+        if (form) {
+            const nameInput = document.getElementById("name");
+            const emailInput = document.getElementById("email");
+            const nameError = document.getElementById("name-error");
+            const emailError = document.getElementById("email-error");
+            const formStatus = document.getElementById("form-status");
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                nameError.textContent = "";
+                emailError.textContent = "";
+                formStatus.textContent = "";
+
+                let isValid = true;
+                const emailValue = emailInput.value;
+
+                if (nameInput.value === "" || emailInput.value === "") {
+                    alert("Name or email address is required.");
+                    isValid = false;
+                } else if (emailValue.indexOf("@") === -1 || emailValue.indexOf(".") === -1) {
+                    alert("Please enter a valid email.");
+                    isValid = false;
+                }
+                if (isValid) {
+                    alert("Thank you for subscribing");
+                }
+            });
+        }
     });
 });
 
@@ -144,3 +174,12 @@ if (form) {
         }
     });
 }
+let btnColorChanger = document.getElementById("changeBg");
+btnColorChanger.addEventListener("click", () => {
+    document.body.style.backgroundColor = generateColor();
+});
+function generateColor() {
+    var color = ["#fae8e8", "#faf3e8", "#f9fae8", "#ecfae8", "#e8faed", "#e8faf8", "#e8f0fa", "#f2e8fa", "#fae8f3", "#d8708a", "#d8b270", "#d8cd70", "#a6d870", "#70d88f", "#70d8c5", "#709fd8", "#9270d8", "#d870be", "#7ea1a0", "#a17e7e", "#a1947e", "#a1a17e", "#8aa17e", "#7e85a1", "#947ea1", "#a17e99"];
+    let randomColor = color[Math.floor(Math.random() * color.length)];
+    return randomColor;
+};
