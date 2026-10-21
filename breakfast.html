@@ -158,6 +158,54 @@
                 </section>
             </div>
         </div>
+        <button id="changeBg">Click to change color</button>
+        <footer class="container-footer text-center text-lg-start" id="footer-container">
+            <div class="footer">
+                <ul class="footer-links">
+                    <li>
+                        <button data-subscription-target="#subscription" class="btn footer-link">Subscription</button>
+                    </li>
+                    <li>
+                        <button data-contact-target="#contact" class="btn footer-link">Contact us</button>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+        <div class="subscription" id="subscription">
+            <div class="subscription-header">
+                <div class="title">Bloom Room Subscription</div>
+                <button data-close-button class="close-button" aria-label="Close subscription popup">&times;</button>
+            </div>
+            <div class="subscription-body">
+                <form class="reservation-form mx-auto" id="subscription-form" novalidate>
+                    <p class="text-muted text-center fw-bold">Get 15% of the first order!</p>
+                    <p class="text-muted text-center">Buy our subscription to get price discounts and other benefits</p>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Your name" aria-describedby="name-error" required>
+                        <div id="name-error" class="form-text text-danger" aria-live="polite"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Your email address" aria-describedby="email-error" required>
+                        <div id="email-error" class="form-text text-danger" aria-live="polite"></div>
+                    </div>
+                    <button type="submit" class="btn btn-danger btn-lg">Subscribe</button>
+                    <p id="form-status" class="mt-3 mb-0" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </div>
+            <div class="contact" id="contact">
+                <div class="contact-header">
+                    <div class="title">Contact us!</div>
+                    <button data-close-button class="close-button" aria-label="Close contact popup">&times;</button>
+                </div>
+                <div class="contact-body">
+                    <p class="text-muted">Corporate mail: bloomroom@gmail.com</p>
+                    <p class="text-muted">Phone number: 785-569-4558</p>
+                </div>
+            </div>
+            <div id="popup-overlay"></div>
     </main>
 
     <footer class="bg-dark py-3 text-center text-white">
