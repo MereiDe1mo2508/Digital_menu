@@ -149,5 +149,111 @@ main {
     .feature-card {
         flex-basis: auto;
     }
+}
+.container-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
+.subscription, .contact {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 200ms ease-in-out;
+    border-radius: 10px;
+    z-index: 1001;
+    background-color: #faf3e8;
+    color: #4a3728;
+    width: 500px;
+    max-width: 80%;
+    visibility: hidden;
+}
+
+.subscription.active,
+.contact.active {
+    transform: translate(-50%, -50%) scale(1);
+    visibility: visible;
+}
+
+.subscription-header,
+.contact-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #4a3728;
+}
+
+.subscription-header .title,
+.contact-header .title {
+    color: #4a3728;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    color: #4a3728;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.subscription-body,
+.contact-body {
+    padding: 10px 15px;
+}
+
+.contact-body p {
+    margin: 8px 0;
+}
+
+#popup-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(74, 55, 40, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 200ms ease-in-out;
+    z-index: 1000;
+}
+
+#popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+.input {
+    border-radius: 20px;
+} 
+
+.subscription-body #output-button {
+    display: inline-block;
+    padding: 0.8rem 1.4rem;
+    font-weight: 700;
+    background-color: rgb(74, 55, 45);
+    color: #fffaf2;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1em;
+}
+@media (max-width: 600px) {
+    .subscription,
+    .contact {
+        width: 90%;
+        max-width: 90%;
+    }
 }
