@@ -22,37 +22,6 @@ subscriptionButtons.forEach(button => {
     button.addEventListener("click", () => {
         const popup = document.querySelector(button.dataset.subscriptionTarget);
         openPopup(popup);
-        const form = document.getElementById("subscription-form");
-
-        if (form) {
-            const nameInput = document.getElementById("name");
-            const emailInput = document.getElementById("email");
-            const nameError = document.getElementById("name-error");
-            const emailError = document.getElementById("email-error");
-            const formStatus = document.getElementById("form-status");
-
-            form.addEventListener("submit", function (event) {
-                event.preventDefault();
-
-                nameError.textContent = "";
-                emailError.textContent = "";
-                formStatus.textContent = "";
-
-                let isValid = true;
-                const emailValue = emailInput.value;
-
-                if (nameInput.value === "" || emailInput.value === "") {
-                    alert("Name or email address is required.");
-                    isValid = false;
-                } else if (emailValue.indexOf("@") === -1 || emailValue.indexOf(".") === -1) {
-                    alert("Please enter a valid email.");
-                    isValid = false;
-                }
-                if (isValid) {
-                    alert("Thank you for subscribing");
-                }
-            });
-        }
     });
 });
 
@@ -138,11 +107,11 @@ if (faqQuestion3) {
 const form = document.getElementById("contact-form");
 
 if (form) {
-    const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
-    const nameError = document.getElementById("name-error");
-    const emailError = document.getElementById("email-error");
-    const formStatus = document.getElementById("form-status");
+    const nameInput = document.getElementById("booking-name");
+    const emailInput = document.getElementById("booking-email");
+    const nameError = document.getElementById("booking-name-error");
+    const emailError = document.getElementById("booking-email-error");
+    const formStatus = document.getElementById("booking-form-status");
 
     form.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -174,6 +143,63 @@ if (form) {
         }
     });
 }
+
+const subscriptionForm = document.getElementById("subscription-form");
+
+if (subscriptionForm) {
+    const subscriptionName = document.getElementById("subscription-name");
+    const subscriptionEmail = document.getElementById("subscription-email");
+    const subscriptionPassword = document.getElementById("subscription-password");
+    const confirmPassword = document.getElementById("subscription-confirm-password");
+    const subscriptionNameError = document.getElementById("subscription-name-error");
+    const subscriptionEmailError = document.getElementById("subscription-email-error");
+    const passwordError = document.getElementById("subscription-password-error");
+    const confirmPasswordError = document.getElementById("subscription-confirm-password-error");
+    const subscriptionStatus = document.getElementById("subscription-form-status");
+
+    subscriptionForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        subscriptionNameError.textContent = "";
+        subscriptionEmailError.textContent = "";
+        passwordError.textContent = "";
+        confirmPasswordError.textContent = "";
+        subscriptionStatus.textContent = "";
+
+        let isValid = true;
+        const emailValue = subscriptionEmail.value;
+
+        if (subscriptionName.value === "") {
+            subscriptionNameError.textContent = "Name is required.";
+            isValid = false;
+        }
+
+        if (emailValue === "") {
+            subscriptionEmailError.textContent = "Email is required.";
+            isValid = false;
+        } else if (emailValue.indexOf("@") === -1 || emailValue.indexOf(".") === -1) {
+            subscriptionEmailError.textContent = "Please enter a valid email.";
+            isValid = false;
+        }
+
+        if (subscriptionPassword.value.length < 6) {
+            passwordError.textContent = "Password must contain at least 6 characters.";
+            isValid = false;
+        }
+
+        if (subscriptionPassword.value !== confirmPassword.value) {
+            confirmPasswordError.textContent = "Passwords do not match.";
+            isValid = false;
+        }
+
+        if (isValid) {
+            subscriptionStatus.textContent = "Thank you for subscribing.";
+        } else {
+            subscriptionStatus.textContent = "Please correct the errors above.";
+        }
+    });
+}
+
 let btnColorChanger = document.getElementById("changeBg");
 btnColorChanger.addEventListener("click", () => {
     document.body.style.backgroundColor = generateColor();
