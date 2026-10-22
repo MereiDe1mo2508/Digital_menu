@@ -36,6 +36,7 @@
                     <a class="link-dark text-decoration-none" href="#story">Our Cafe</a>
                     <a class="link-dark text-decoration-none" href="#gallery">Photo Gallery</a>
                     <a class="link-dark text-decoration-none" href="#team">Our Team</a>
+                    <a class="link-dark text-decoration-none" href="#faq">FAQ</a>
                     <a class="link-dark text-decoration-none" href="#hours">Opening Hours</a>
                     <a class="link-dark text-decoration-none" href="#visit">Visit Us</a>
                     <a class="link-dark text-decoration-none" href="#booking">Book a Table</a>
@@ -134,6 +135,45 @@
                     </p>
                 </section>
 
+                <section id="faq" class="mt-5" aria-labelledby="faq-title">
+                    <h2 id="faq-title" class="mb-4">Frequently Asked Questions</h2>
+                    <div class="faq-list">
+                        <article class="faq-item">
+                            <h3 class="h5 mb-0">
+                                <button class="faq-question" id="faq-question-1" type="button" aria-expanded="false"
+                                        aria-controls="faq-answer-1">
+                                    Do you accept reservations?
+                                </button>
+                            </h3>
+                            <div class="faq-answer" id="faq-answer-1">
+                                <p>Yes. You can use the booking form below to send a table request.</p>
+                            </div>
+                        </article>
+                        <article class="faq-item">
+                            <h3 class="h5 mb-0">
+                                <button class="faq-question" id="faq-question-2" type="button" aria-expanded="false"
+                                        aria-controls="faq-answer-2">
+                                    Do you have vegetarian dishes?
+                                </button>
+                            </h3>
+                            <div class="faq-answer" id="faq-answer-2">
+                                <p>Yes. Our menu includes vegetarian salads, sandwiches and other options.</p>
+                            </div>
+                        </article>
+                        <article class="faq-item">
+                            <h3 class="h5 mb-0">
+                                <button class="faq-question" id="faq-question-3" type="button" aria-expanded="false"
+                                        aria-controls="faq-answer-3">
+                                    Can I visit without a reservation?
+                                </button>
+                            </h3>
+                            <div class="faq-answer" id="faq-answer-3">
+                                <p>Yes. Walk-in guests are welcome while tables are available.</p>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
                 <section id="team" class="mt-5">
                     <h2 class="mb-4">About the Team Members</h2>
                     <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -162,6 +202,7 @@
 
                 <section id="hours" class="mt-5">
                     <h2 class="mb-3">Opening Hours</h2>
+                    <p>Current date and time: <time id="current-date-time" aria-live="polite">Loading...</time></p>
                     <div class="table-responsive">
                         <table class="table table-bordered hours-table">
                             <thead>
@@ -200,19 +241,21 @@
 
                 <section id="booking" class="mt-5">
                     <h2 class="mb-3">Book a Table</h2>
-                    <form class="reservation-form mx-auto p-4 border rounded" id="contact-form">
+                    <form class="reservation-form mx-auto p-4 border rounded" id="contact-form" novalidate>
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" id="name" name="name" class="form-control"
-                                   placeholder="Your name" required>
+                                   placeholder="Your name" aria-describedby="name-error" required>
+                            <div id="name-error" class="form-text text-danger" aria-live="polite"></div>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <div class="input-group">
                                 <span class="input-group-text">@</span>
                                 <input type="email" id="email" name="email" class="form-control"
-                                       placeholder="you@example.com" required>
+                                       placeholder="you@example.com" aria-describedby="email-error" required>
                             </div>
+                            <div id="email-error" class="form-text text-danger" aria-live="polite"></div>
                         </div>
                         <div class="mb-3">
                             <label for="time" class="form-label">Preferred time</label>
@@ -228,6 +271,7 @@
                                       rows="4" placeholder="Number of guests, special requests..."></textarea>
                         </div>
                         <button type="submit" class="btn btn-danger btn-lg">Send Request</button>
+                        <p id="form-status" class="mt-3 mb-0" role="status" aria-live="polite"></p>
                     </form>
                 </section>
             </div>
@@ -275,6 +319,7 @@
         </div>
     </footer>
 
+    <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -107,6 +107,37 @@ main {
     max-width: 560px;
 }
 
+.faq-item {
+    border-bottom: 1px solid rgba(74, 55, 40, 0.2);
+}
+
+.faq-question {
+    width: 100%;
+    padding: 1rem 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    font: inherit;
+    font-weight: 600;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.faq-answer p {
+    margin: 0 0 1rem;
+}
+
+.faq-answer.show {
+    max-height: 120px;
+    opacity: 1;
+}
+
 @media (max-width: 991.98px) {
     .hero-section h1 {
         font-size: 2.5rem;
