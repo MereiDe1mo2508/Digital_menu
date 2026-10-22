@@ -121,17 +121,21 @@ if (form) {
         formStatus.textContent = "";
 
         let isValid = true;
-        const emailValue = emailInput.value;
+        const nameValue = nameInput.value.trim();
+        const emailValue = emailInput.value.trim();
 
-        if (nameInput.value === "") {
+        if (nameValue === "") {
             nameError.textContent = "Name is required.";
+            isValid = false;
+        } else if (!/^[A-Za-zА-Яа-яЁё\s]+$/.test(nameValue)) {
+            nameError.textContent = "Name can contain only letters and spaces.";
             isValid = false;
         }
 
         if (emailValue === "") {
             emailError.textContent = "Email is required.";
             isValid = false;
-        } else if (emailValue.indexOf("@") === -1 || emailValue.indexOf(".") === -1) {
+        } else if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(emailValue)) {
             emailError.textContent = "Please enter a valid email.";
             isValid = false;
         }
@@ -167,17 +171,21 @@ if (subscriptionForm) {
         subscriptionStatus.textContent = "";
 
         let isValid = true;
-        const emailValue = subscriptionEmail.value;
+        const nameValue = subscriptionName.value.trim();
+        const emailValue = subscriptionEmail.value.trim();
 
-        if (subscriptionName.value === "") {
+        if (nameValue === "") {
             subscriptionNameError.textContent = "Name is required.";
+            isValid = false;
+        } else if (!/^[A-Za-zА-Яа-яЁё\s]+$/.test(nameValue)) {
+            subscriptionNameError.textContent = "Name can contain only letters and spaces.";
             isValid = false;
         }
 
         if (emailValue === "") {
             subscriptionEmailError.textContent = "Email is required.";
             isValid = false;
-        } else if (emailValue.indexOf("@") === -1 || emailValue.indexOf(".") === -1) {
+        } else if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(emailValue)) {
             subscriptionEmailError.textContent = "Please enter a valid email.";
             isValid = false;
         }
