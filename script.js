@@ -1,53 +1,36 @@
-const subscriptionButtons = document.querySelectorAll("[data-subscription-target]");
-const contactButtons = document.querySelectorAll("[data-contact-target]");
-const closeButtons = document.querySelectorAll("[data-close-button]");
-const overlay = document.querySelector("#popup-overlay");
+const subscriptionButton = document.getElementById("open-subscription");
+const subscriptionPopup = document.getElementById("subscription");
+const closeSubscriptionButton = document.getElementById("close-subscription");
+const contactButton = document.getElementById("open-contact");
+const contactPopup = document.getElementById("contact");
+const closeContactButton = document.getElementById("close-contact");
+const overlay = document.getElementById("popup-overlay");
 
-function openPopup(popup) {
-    if (!popup || !overlay) return;
-    popup.classList.add("active");
+subscriptionButton.addEventListener("click", function () {
+    subscriptionPopup.classList.add("active");
     overlay.classList.add("active");
-}
-
-function closePopup(popup) {
-    if (!popup || !overlay) return;
-    popup.classList.remove("active");
-    const anotherPopupIsActive = document.querySelector(".subscription.active, .contact.active");
-    if (!anotherPopupIsActive) {
-        overlay.classList.remove("active");
-    }
-}
-
-subscriptionButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        const popup = document.querySelector(button.dataset.subscriptionTarget);
-        openPopup(popup);
-    });
 });
 
-contactButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        const popup = document.querySelector(button.dataset.contactTarget);
-        openPopup(popup);
-    });
+closeSubscriptionButton.addEventListener("click", function () {
+    subscriptionPopup.classList.remove("active");
+    overlay.classList.remove("active");
 });
 
-closeButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        const popup = button.closest(".subscription, .contact");
-        closePopup(popup);
-    });
+contactButton.addEventListener("click", function () {
+    contactPopup.classList.add("active");
+    overlay.classList.add("active");
 });
 
-if (overlay) {
-    overlay.addEventListener("click", () => {
-        document.querySelectorAll(".subscription.active, .contact.active").forEach(popup => {
-            popup.classList.remove("active");
-        });
+closeContactButton.addEventListener("click", function () {
+    contactPopup.classList.remove("active");
+    overlay.classList.remove("active");
+});
 
-        overlay.classList.remove("active");
-    });
-}
+overlay.addEventListener("click", function () {
+    subscriptionPopup.classList.remove("active");
+    contactPopup.classList.remove("active");
+    overlay.classList.remove("active");
+});
 
 const dateTime = document.getElementById("current-date-time");
 
@@ -208,12 +191,16 @@ if (subscriptionForm) {
     });
 }
 
-let btnColorChanger = document.getElementById("changeBg");
-btnColorChanger.addEventListener("click", () => {
-    document.body.style.backgroundColor = generateColor();
-});
+const btnColorChanger = document.getElementById("changeBg");
+
+if (btnColorChanger) {
+    btnColorChanger.addEventListener("click", () => {
+        document.body.style.backgroundColor = generateColor();
+    });
+}
+
 function generateColor() {
-    var color = ["#fae8e8", "#faf3e8", "#f9fae8", "#ecfae8", "#e8faed", "#e8faf8", "#e8f0fa", "#f2e8fa", "#fae8f3", "#d8708a", "#d8b270", "#d8cd70", "#a6d870", "#70d88f", "#70d8c5", "#709fd8", "#9270d8", "#d870be", "#7ea1a0", "#a17e7e", "#a1947e", "#a1a17e", "#8aa17e", "#7e85a1", "#947ea1", "#a17e99"];
-    let randomColor = color[Math.floor(Math.random() * color.length)];
+    const color = ["#fae8e8", "#faf3e8", "#f9fae8", "#ecfae8", "#e8faed", "#e8faf8", "#e8f0fa", "#f2e8fa", "#fae8f3", "#d8708a", "#d8b270", "#d8cd70", "#a6d870", "#70d88f", "#70d8c5", "#709fd8", "#9270d8", "#d870be", "#7ea1a0", "#a17e7e", "#a1947e", "#a1a17e", "#8aa17e", "#7e85a1", "#947ea1", "#a17e99"];
+    const randomColor = color[Math.floor(Math.random() * color.length)];
     return randomColor;
 };

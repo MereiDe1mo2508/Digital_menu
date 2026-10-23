@@ -107,10 +107,10 @@
         <div class="footer">
             <ul class="footer-links">
                 <li>
-                    <button data-subscription-target="#subscription" class="btn footer-link">Subscription</button>
+                    <button id="open-subscription" class="btn footer-link">Subscription</button>
                 </li>
                 <li>
-                    <button data-contact-target="#contact" class="btn footer-link">Contact us</button>
+                    <button id="open-contact" class="btn footer-link">Contact us</button>
                 </li>
             </ul>
         </div>
@@ -118,7 +118,7 @@
     <div class="subscription" id="subscription">
         <div class="subscription-header">
             <div class="title">Bloom Room Subscription</div>
-            <button data-close-button class="close-button" aria-label="Close subscription popup">&times;</button>
+            <button id="close-subscription" class="close-button" aria-label="Close subscription popup">&times;</button>
         </div>
         <div class="subscription-body">
             <form class="reservation-form mx-auto" id="subscription-form" novalidate>
@@ -152,7 +152,7 @@
         <div class="contact" id="contact">
             <div class="contact-header">
                 <div class="title">Contact us!</div>
-                <button data-close-button class="close-button" aria-label="Close contact popup">&times;</button>
+                <button id="close-contact" class="close-button" aria-label="Close contact popup">&times;</button>
             </div>
             <div class="contact-body">
                 <p class="text-muted">Corporate mail: bloomroom@gmail.com</p>
