@@ -87,6 +87,7 @@ if (faqQuestion3) {
     });
 }
 
+
 const form = document.getElementById("contact-form");
 
 if (form) {
@@ -110,16 +111,19 @@ if (form) {
         if (nameValue === "") {
             nameError.textContent = "Name is required.";
             isValid = false;
-        } else if (!/^[A-Za-zА-Яа-яЁё\s]+$/.test(nameValue)) {
-            nameError.textContent = "Name can contain only letters and spaces.";
+        } else if (/\d/.test(nameValue)) {
+            nameError.textContent = "Name should not contain numbers.";
             isValid = false;
         }
 
         if (emailValue === "") {
             emailError.textContent = "Email is required.";
             isValid = false;
-        } else if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(emailValue)) {
+        } else if (!emailValue.includes("@") || !emailValue.includes(".")) {
             emailError.textContent = "Please enter a valid email.";
+            isValid = false;
+        } else if (emailValue.includes(" ")) {
+            emailError.textContent = "Email should not contain spaces.";
             isValid = false;
         }
 
@@ -160,16 +164,19 @@ if (subscriptionForm) {
         if (nameValue === "") {
             subscriptionNameError.textContent = "Name is required.";
             isValid = false;
-        } else if (!/^[A-Za-zА-Яа-яЁё\s]+$/.test(nameValue)) {
-            subscriptionNameError.textContent = "Name can contain only letters and spaces.";
+        } else if (/\d/.test(nameValue)) {
+            subscriptionNameError.textContent = "Name should not contain numbers.";
             isValid = false;
         }
 
         if (emailValue === "") {
             subscriptionEmailError.textContent = "Email is required.";
             isValid = false;
-        } else if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(emailValue)) {
+        } else if (!emailValue.includes("@") || !emailValue.includes(".")) {
             subscriptionEmailError.textContent = "Please enter a valid email.";
+            isValid = false;
+        } else if (emailValue.includes(" ")) {
+            subscriptionEmailError.textContent = "Email should not contain spaces.";
             isValid = false;
         }
 
