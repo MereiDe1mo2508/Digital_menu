@@ -103,22 +103,27 @@
             </div>
         </section>
         <button id="changeBg">Click to change color</button>
-    <footer class="container-footer text-center text-lg-end" id="footer-container">
-        <div class="footer">
-            <ul class="footer-links">
-                <li>
-                    <button id="open-subscription" class="btn footer-link">Subscription</button>
-                </li>
-                <li>
-                    <button id="open-contact" class="btn footer-link">Contact us</button>
-                </li>
-            </ul>
+    </main>
+
+    <footer class="bg-dark py-3 text-center text-white">
+        <div class="container d-flex justify-content-between align-items-center text-body-light">
+            <span>This project was made by Merei Sapar and Assem Ozharova.</span>
+            <div class="footer d-flex gap-2">
+                <ul class="footer-links">
+                    <li>
+                        <button data-subscription-target="#subscription" class="btn footer-link text-light">Subscription</button>
+                    </li>
+                    <li>
+                        <button data-contact-target="#contact" class="btn footer-link text-light">Contact us</button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </footer>
     <div class="subscription" id="subscription">
         <div class="subscription-header">
             <div class="title">Bloom Room Subscription</div>
-            <button id="close-subscription" class="close-button" aria-label="Close subscription popup">&times;</button>
+            <button data-close-button class="close-button" aria-label="Close subscription popup">&times;</button>
         </div>
         <div class="subscription-body">
             <form class="reservation-form mx-auto" id="subscription-form" novalidate>
@@ -152,7 +157,7 @@
         <div class="contact" id="contact">
             <div class="contact-header">
                 <div class="title">Contact us!</div>
-                <button id="close-contact" class="close-button" aria-label="Close contact popup">&times;</button>
+                <button data-close-button class="close-button" aria-label="Close contact popup">&times;</button>
             </div>
             <div class="contact-body">
                 <p class="text-muted">Corporate mail: bloomroom@gmail.com</p>
@@ -160,15 +165,6 @@
             </div>
         </div>
         <div id="popup-overlay"></div>
-    </main>
-
-    <footer class="bg-dark py-3 text-center text-white">
-        <div class="container">
-            This project was made by Merei Sapar and Assem Ozharova.
-        </div>
-
-    </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
