@@ -1,35 +1,30 @@
-const subscriptionButton = document.getElementById("open-subscription");
-const subscriptionPopup = document.getElementById("subscription");
-const closeSubscriptionButton = document.getElementById("close-subscription");
-const contactButton = document.getElementById("open-contact");
-const contactPopup = document.getElementById("contact");
-const closeContactButton = document.getElementById("close-contact");
-const overlay = document.getElementById("popup-overlay");
-
-subscriptionButton.addEventListener("click", function () {
-    subscriptionPopup.classList.add("active");
-    overlay.classList.add("active");
-});
-
-closeSubscriptionButton.addEventListener("click", function () {
-    subscriptionPopup.classList.remove("active");
-    overlay.classList.remove("active");
-});
-
-contactButton.addEventListener("click", function () {
-    contactPopup.classList.add("active");
-    overlay.classList.add("active");
-});
-
-closeContactButton.addEventListener("click", function () {
-    contactPopup.classList.remove("active");
-    overlay.classList.remove("active");
-});
-
-overlay.addEventListener("click", function () {
-    subscriptionPopup.classList.remove("active");
-    contactPopup.classList.remove("active");
-    overlay.classList.remove("active");
+document.addEventListener("DOMContentLoaded", () => {
+    const subscriptionButton = document.querySelector("[data-subscription-target]");
+    const contactButton = document.querySelector("[data-contact-target]");
+    const subscriptionPopup = document.querySelector("#subscription");
+    const contactPopup = document.querySelector("#contact");
+    const overlay = document.querySelector("#popup-overlay");
+    const closeButtons = document.querySelectorAll("[data-close-button]");
+    function openPopup(popup) {
+        if (!popup || !overlay) return;
+        popup.classList.add("active");
+        overlay.classList.add("active");
+    }
+    function closePopups() {
+        subscriptionPopup?.classList.remove("active");
+        contactPopup?.classList.remove("active");
+        overlay?.classList.remove("active");
+    }
+    subscriptionButton?.addEventListener("click", () => {
+        openPopup(subscriptionPopup);
+    });
+    contactButton?.addEventListener("click", () => {
+        openPopup(contactPopup);
+    });
+    closeButtons.forEach(button => {
+        button.addEventListener("click", closePopups);
+    });
+    overlay?.addEventListener("click", closePopups);
 });
 
 const dateTime = document.getElementById("current-date-time");
@@ -108,7 +103,7 @@ if (form) {
         const nameValue = nameInput.value.trim();
         const emailValue = emailInput.value.trim();
 
-        if (nameValue === "") {
+        if (nameValue === " " || nameValue === null) {
             nameError.textContent = "Name is required.";
             isValid = false;
         } else if (/\d/.test(nameValue)) {
@@ -167,6 +162,8 @@ if (subscriptionForm) {
         } else if (/\d/.test(nameValue)) {
             subscriptionNameError.textContent = "Name should not contain numbers.";
             isValid = false;
+        } else if (nameValue.includes(" ")) {
+            subscriptionNameError.textContent = "Name should not contain spaces"
         }
 
         if (emailValue === "") {
