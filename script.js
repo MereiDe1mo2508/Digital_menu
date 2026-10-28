@@ -91,6 +91,7 @@ if (form) {
     const nameError = document.getElementById("booking-name-error");
     const emailError = document.getElementById("booking-email-error");
     const formStatus = document.getElementById("booking-form-status");
+    const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
     form.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -103,18 +104,21 @@ if (form) {
         const nameValue = nameInput.value.trim();
         const emailValue = emailInput.value.trim();
 
-        if (nameValue === " " || nameValue === null) {
+        if (nameValue === "") {
             nameError.textContent = "Name is required.";
             isValid = false;
         } else if (/\d/.test(nameValue)) {
             nameError.textContent = "Name should not contain numbers.";
+            isValid = false;
+        } else if(nameValue.length < 3) {
+            nameError.textContent = "Name should contain at least 3 letters";
             isValid = false;
         }
 
         if (emailValue === "") {
             emailError.textContent = "Email is required.";
             isValid = false;
-        } else if (!emailValue.includes("@") || !emailValue.includes(".")) {
+        } else if (emailValue !== re) {
             emailError.textContent = "Please enter a valid email.";
             isValid = false;
         } else if (emailValue.includes(" ")) {
@@ -142,6 +146,7 @@ if (subscriptionForm) {
     const passwordError = document.getElementById("subscription-password-error");
     const confirmPasswordError = document.getElementById("subscription-confirm-password-error");
     const subscriptionStatus = document.getElementById("subscription-form-status");
+    const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
     subscriptionForm.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -162,21 +167,21 @@ if (subscriptionForm) {
         } else if (/\d/.test(nameValue)) {
             subscriptionNameError.textContent = "Name should not contain numbers.";
             isValid = false;
-        } else if (nameValue.includes(" ")) {
-            subscriptionNameError.textContent = "Name should not contain spaces"
+        } else if(nameValue.length < 3) {
+            subscriptionNameError.textContent = "Name should contain at least 3 letters";
+            isValid = false;
         }
 
         if (emailValue === "") {
             subscriptionEmailError.textContent = "Email is required.";
             isValid = false;
-        } else if (!emailValue.includes("@") || !emailValue.includes(".")) {
-            subscriptionEmailError.textContent = "Please enter a valid email.";
+        } else if (emailValue !== re) {
+            subscriptionEmailError.textContent = "Please enter a valid email";
             isValid = false;
         } else if (emailValue.includes(" ")) {
             subscriptionEmailError.textContent = "Email should not contain spaces.";
             isValid = false;
         }
-
         if (subscriptionPassword.value.length < 6) {
             passwordError.textContent = "Password must contain at least 6 characters.";
             isValid = false;
