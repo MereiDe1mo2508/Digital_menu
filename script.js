@@ -132,6 +132,11 @@ if (form) {
             formStatus.textContent = "Please correct the errors above.";
         }
     });
+
+    const resetBtn = document.querySelectorAll('#contact-form');
+    resetBtn.forEach("reset", function (event){
+        resetBtn().reset();
+    });
 }
 
 const subscriptionForm = document.getElementById("subscription-form");
