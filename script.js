@@ -86,16 +86,18 @@ if (faqQuestion3) {
 const form = document.getElementById("contact-form");
 
 if (form) {
+    const bookingStep1 = document.getElementById("booking-step-1");
+    const bookingStep2 = document.getElementById("booking-step-2");
+    const bookingNext = document.getElementById("booking-next");
+    const bookingBack = document.getElementById("booking-back");
     const nameInput = document.getElementById("booking-name");
     const emailInput = document.getElementById("booking-email");
     const nameError = document.getElementById("booking-name-error");
     const emailError = document.getElementById("booking-email-error");
     const formStatus = document.getElementById("booking-form-status");
-    const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    let currentBookingStep = 1;
 
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
-
+    function validateBookingStep1() {
         nameError.textContent = "";
         emailError.textContent = "";
         formStatus.textContent = "";
@@ -107,8 +109,8 @@ if (form) {
         if (nameValue === "") {
             nameError.textContent = "Name is required.";
             isValid = false;
-        } else if (/\d/.test(nameValue)) {
-            nameError.textContent = "Name should not contain numbers.";
+        } else if (!/^\p{L}+(?:[ -]\p{L}+)*$/u.test(nameValue)) {
+            nameError.textContent = "Use letters, spaces or hyphens only.";
             isValid = false;
         } else if(nameValue.length < 3) {
             nameError.textContent = "Name should contain at least 3 letters";
@@ -118,14 +120,34 @@ if (form) {
         if (emailValue === "") {
             emailError.textContent = "Email is required.";
             isValid = false;
-        } else if (emailValue !== re) {
+        } else if (!/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(emailValue)) {
             emailError.textContent = "Please enter a valid email.";
             isValid = false;
-        } else if (emailValue.includes(" ")) {
-            emailError.textContent = "Email should not contain spaces.";
-            isValid = false;
         }
+        return isValid;
+    };
 
+    bookingNext.addEventListener("click", function() {
+        if(validateBookingStep1()) {
+            bookingStep1.style.display = "none";
+            bookingStep2.style.display = "block";
+            currentBookingStep = 2;
+        }
+    });
+
+    bookingBack.addEventListener("click", function() {
+        bookingStep1.style.display = "block";
+        bookingStep2.style.display = "none";
+        currentBookingStep = 1;
+    });
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (currentBookingStep === 1) {
+            bookingNext.click();
+            return;
+        }
+        const isValid = validateBookingStep1();
         if (isValid) {
             formStatus.textContent = "Your table request was sent successfully.";
         } else {
@@ -133,9 +155,13 @@ if (form) {
         }
     });
 
-    const resetBtn = document.querySelectorAll('#contact-form');
-    resetBtn.forEach("reset", function (event){
-        resetBtn().reset();
+    form.addEventListener("reset", function () {
+        bookingStep1.style.display = "block";
+        bookingStep2.style.display = "none";
+        currentBookingStep = 1;
+        nameError.textContent = "";
+        emailError.textContent = "";
+        formStatus.textContent = "";
     });
 }
 
@@ -151,7 +177,6 @@ if (subscriptionForm) {
     const passwordError = document.getElementById("subscription-password-error");
     const confirmPasswordError = document.getElementById("subscription-confirm-password-error");
     const subscriptionStatus = document.getElementById("subscription-form-status");
-    const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
     subscriptionForm.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -169,8 +194,8 @@ if (subscriptionForm) {
         if (nameValue === "") {
             subscriptionNameError.textContent = "Name is required.";
             isValid = false;
-        } else if (/\d/.test(nameValue)) {
-            subscriptionNameError.textContent = "Name should not contain numbers.";
+        } else if (!/^\p{L}+(?:[ -]\p{L}+)*$/u.test(nameValue)) {
+            subscriptionNameError.textContent = "Use letters, spaces or hyphens only.";
             isValid = false;
         } else if(nameValue.length < 3) {
             subscriptionNameError.textContent = "Name should contain at least 3 letters";
@@ -180,11 +205,8 @@ if (subscriptionForm) {
         if (emailValue === "") {
             subscriptionEmailError.textContent = "Email is required.";
             isValid = false;
-        } else if (emailValue !== re) {
-            subscriptionEmailError.textContent = "Please enter a valid email";
-            isValid = false;
-        } else if (emailValue.includes(" ")) {
-            subscriptionEmailError.textContent = "Email should not contain spaces.";
+        } else if (!/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(emailValue)) {
+            subscriptionEmailError.textContent = "Please enter a valid email.";
             isValid = false;
         }
         if (subscriptionPassword.value.length < 6) {
