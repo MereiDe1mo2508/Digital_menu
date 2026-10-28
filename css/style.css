@@ -1,16 +1,23 @@
-:root {
+body {
     --primary-color: #d8708a;
     --secondary-color: #8aa17e;
     --cream-color: #faf3e8;
     --brown-color: #4a3728;
-}
-
-body {
     min-height: 100vh;
     margin: 0;
     background-color: var(--cream-color);
     color: var(--brown-color);
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+body.dark-mode {
+    --primary-dark: #75414e;
+    --secondary-dark: #535f4d;
+    --dark-color: #302c29;
+    --yellowish-color: #e5e9b3;
+    background-color: var(--dark-color);
+    color: var(--yellowish-color);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 main {
@@ -51,6 +58,9 @@ main {
     border-radius: 8px;
     background-color: #fffaf2;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.feature-card.dark-mode {
+    background-color: #1b1817;
 }
 
 .feature-card:hover {
@@ -96,6 +106,10 @@ main {
 .hours-table th {
     background-color: var(--secondary-color);
     color: var(--cream-color);
+}
+.hours-table.dark-mode {
+    background-color: var(--secondary-dark);
+    color: var(--dark-color);
 }
 
 .hours-table th,
@@ -279,7 +293,7 @@ main {
     }
 }
 #changeBg {
-    display: block;
+    display: flex;
     margin: 0 auto;
     border: 1px solid #4a3728;
     border-radius: 1.2rem;
@@ -287,7 +301,31 @@ main {
     cursor: pointer;
     outline: none;
 }
-
+#theme-btn {
+    display: flex;
+    margin: 0 auto;
+    border: 1px solid #4a3728;
+    border-radius: 1.2rem;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+}
+.dark-mode {
+    color-scheme: dark;
+}
 #booking-step-2 {
     display: none;
+}
+
+.rating {
+    max-width: 100%;
+    background: transparent;
+    width: 70%;
+}
+.star {
+    font-size: 3rem;
+    cursor: pointer;
+}
+.one, .two, .three, .four, .five {
+    color: gold;
 }
