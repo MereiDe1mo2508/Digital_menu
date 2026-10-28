@@ -24,6 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
     closeButtons.forEach(button => {
         button.addEventListener("click", closePopups);
     });
+    document.addEventListener('keydown', (event) => {
+        if(event.key === 'Escape') {
+            closePopups();
+        }
+    });
     overlay?.addEventListener("click", closePopups);
 });
 
@@ -186,7 +191,7 @@ if (form) {
         setTimeout(updateBookingTimeInfo, 0);
     });
 }
-
+//pop-up subscription form
 const subscriptionForm = document.getElementById("subscription-form");
 
 if (subscriptionForm) {
@@ -248,7 +253,7 @@ if (subscriptionForm) {
         }
     });
 }
-
+//background color changer
 const btnColorChanger = document.getElementById("changeBg");
 
 if (btnColorChanger) {
@@ -262,3 +267,40 @@ function generateColor() {
     const randomColor = color[Math.floor(Math.random() * color.length)];
     return randomColor;
 };
+//changing theme to dark (doesn't work on some values and when background color is changed)
+const themeBtn = document.getElementById("theme-btn");
+if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+    });
+}
+function switchTheme() {
+    themeBtn.classList.toggle("dark-mode", themeBtn.checkVisibility);
+}
+//star rating system
+let stars = document.getElementsByClassName("star");
+let output = document.getElementById("output");
+function gfg(n) {
+    remove();
+    for (let i = 0; i < n; i++) {
+        if (n == 1) cls = "one";
+        else if (n == 2) cls = "two";
+        else if (n == 3) cls = "three";
+        else if (n == 4) cls = "four";
+        else if (n == 5) cls = "five";
+        stars[i].className = "star " + cls;
+    }
+    output.innerText = "Rating is: " + n + "/5";
+}
+function remove() {
+    let i = 0;
+    while (i < 5) {
+        stars[i].className = "star";
+        i++;
+    }
+}
+document.addEventListener('keydown', e => {
+    if (e.key === 'k') {
+        alert("Congrats! You found a secret egg which is keydown function!!")
+    }
+});
