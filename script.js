@@ -98,6 +98,7 @@ if (form) {
     let currentBookingStep = 1;
     const bookingTime = document.getElementById("time");
     const bookingTimeInfo = document.getElementById("booking-time-info");
+    const bookingSuccessSound = new Audio("sounds/success.mp3");
 
     function updateBookingTimeInfo() {
         switch (bookingTime.value) {
@@ -167,6 +168,8 @@ if (form) {
         }
         const isValid = validateBookingStep1();
         if (isValid) {
+            bookingSuccessSound.currentTime = 0;
+            bookingSuccessSound.play();
             formStatus.textContent = "Your table request was sent successfully.";
         } else {
             formStatus.textContent = "Please correct the errors above.";
