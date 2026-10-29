@@ -96,6 +96,24 @@ if (form) {
     const emailError = document.getElementById("booking-email-error");
     const formStatus = document.getElementById("booking-form-status");
     let currentBookingStep = 1;
+    const bookingTime = document.getElementById("time");
+    const bookingTimeInfo = document.getElementById("booking-time-info");
+
+    function updateBookingTimeInfo() {
+        switch (bookingTime.value) {
+            case "morning":
+                bookingTimeInfo.textContent = "Breakfast is served from 08:00 to 11:00.";
+                break;
+            case "afternoon":
+                bookingTimeInfo.textContent = "Lunch is served from 12:00 to 16:00.";
+                break;
+            case "evening":
+                bookingTimeInfo.textContent = "Dinner is served from 17:00 to 21:00.";
+                break;
+        }
+    }
+    bookingTime.addEventListener("change", updateBookingTimeInfo);
+    updateBookingTimeInfo();
 
     function validateBookingStep1() {
         nameError.textContent = "";
@@ -162,6 +180,7 @@ if (form) {
         nameError.textContent = "";
         emailError.textContent = "";
         formStatus.textContent = "";
+        setTimeout(updateBookingTimeInfo, 0);
     });
 }
 
