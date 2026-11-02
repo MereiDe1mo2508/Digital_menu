@@ -27,15 +27,22 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="mainNavigation">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="breakfast.html">Breakfast</a></li>
                     <li class="nav-item"><a class="nav-link" href="lunch.html">Lunch</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <button id="theme-btn" class="btn btn-outline-light btn-sm" type="button">🌙 Dark Mode</button>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <div class="text-center py-2 border-bottom" id="greeting-banner">
+        <span class="fw-bold text-danger" id="greeting-text"></span>
+    </div>
 
     <main>
         <section class="container py-5" aria-labelledby="about-cafe-title">
@@ -104,9 +111,8 @@
             </div>
         </section>
         <section class="button-togglers">
-            <div class="d-flex gap-2 justify-content-center align-items-center">
+            <div class="d-flex justify-content-center align-items-center">
                 <button id="changeBg">Click to change color</button>
-                <button id="theme-btn">Click to change in dark mode</button>
             </div>
         </section>
         

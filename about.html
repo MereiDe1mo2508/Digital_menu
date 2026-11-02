@@ -19,28 +19,35 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="mainNavigation">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="breakfast.html">Breakfast</a></li>
                     <li class="nav-item"><a class="nav-link" href="lunch.html">Lunch</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="about.html">About</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <button id="theme-btn" class="btn btn-outline-light btn-sm" type="button">🌙 Dark Mode</button>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <div class="text-center py-2 border-bottom" id="greeting-banner">
+        <span class="fw-bold text-danger" id="greeting-text"></span>
+    </div>
 
     <main class="container-fluid flex-grow-1 py-4">
         <div class="row g-4">
             <aside class="col-md-3 border-end bg-danger-subtle p-4">
                 <h1 class="h2">About Us</h1>
                 <nav class="d-flex flex-column gap-3" aria-label="About page sections">
-                    <a class="link-dark text-decoration-none" href="#story">Our Cafe</a>
-                    <a class="link-dark text-decoration-none" href="#gallery">Photo Gallery</a>
-                    <a class="link-dark text-decoration-none" href="#team">Our Team</a>
-                    <a class="link-dark text-decoration-none" href="#faq">FAQ</a>
-                    <a class="link-dark text-decoration-none" href="#hours">Opening Hours</a>
-                    <a class="link-dark text-decoration-none" href="#visit">Visit Us</a>
-                    <a class="link-dark text-decoration-none" href="#booking">Book a Table</a>
+                    <a class="link-body-emphasis text-decoration-none" href="#story">Our Cafe</a>
+                    <a class="link-body-emphasis text-decoration-none" href="#gallery">Photo Gallery</a>
+                    <a class="link-body-emphasis text-decoration-none" href="#team">Our Team</a>
+                    <a class="link-body-emphasis text-decoration-none" href="#faq">FAQ</a>
+                    <a class="link-body-emphasis text-decoration-none" href="#hours">Opening Hours</a>
+                    <a class="link-body-emphasis text-decoration-none" href="#visit">Visit Us</a>
+                    <a class="link-body-emphasis text-decoration-none" href="#booking">Book a Table</a>
                 </nav>
             </aside>
 
@@ -259,7 +266,7 @@
                                 </div>
                                 <div id="booking-email-error" class="form-text text-danger" aria-live="polite"></div>
                             </div>
-                            <button id="booking-next" type="button">Next</button>
+                            <button id="booking-next" type="button" class="btn btn-outline-danger">Next</button>
                         </div>
                         <div id="booking-step-2">
                             <div class="mb-3">
@@ -276,10 +283,10 @@
                                 <textarea id="message" name="message" class="form-control"
                                         rows="4" placeholder="Number of guests, special requests..."></textarea>
                             </div>
-                            <div class="btn d-flex gap-2 justify-content-start">
-                                <button id="booking-back" type="button">Back</button>
-                                <button type="submit" class="btn btn-danger btn-lg">Send Request</button>
-                                <button type="reset" class="btn btn-secondary btn-lg">Reset Form</button>
+                            <div class="d-flex gap-2 justify-content-start mt-3">
+                                <button id="booking-back" type="button" class="btn btn-outline-danger">Back</button>
+                                <button type="submit" class="btn btn-danger">Send Request</button>
+                                <button type="reset" class="btn btn-outline-secondary">Reset Form</button>
                             </div>
                         </div>
                         <p id="booking-form-status" class="mt-3 mb-0" role="status" aria-live="polite"></p>
@@ -299,7 +306,6 @@
                 <section id="buttons" class="mt-5">
                     <div class="d-flex justify-content-center align-items-center">
                         <button id="changeBg">Click to change color</button>
-                        <button id="theme-btn">Click to change in dark mode</button>
                     </div>
                 </section>
             </div>

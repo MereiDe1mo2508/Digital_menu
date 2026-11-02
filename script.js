@@ -41,6 +41,31 @@ if (dateTime) {
     }, 1000);
 }
 
+// Greeting message by time using switch case
+const greetingText = document.getElementById("greeting-text");
+
+if (greetingText) {
+    const currentHour = new Date().getHours();
+    let greetingMessage = "";
+
+    switch (true) {
+        case (currentHour >= 6 && currentHour < 12):
+            greetingMessage = "Good morning! Welcome to Bloom Room Cafe";
+            break;
+        case (currentHour >= 12 && currentHour < 18):
+            greetingMessage = "Good day! Welcome to Bloom Room Cafe";
+            break;
+        case (currentHour >= 18 && currentHour < 24):
+            greetingMessage = "Good evening! Welcome to Bloom Room Cafe";
+            break;
+        default:
+            greetingMessage = "Good night! Welcome to Bloom Room Cafe";
+            break;
+    }
+
+    greetingText.textContent = greetingMessage;
+}
+
 const faqQuestion1 = document.getElementById("faq-question-1");
 const faqAnswer1 = document.getElementById("faq-answer-1");
 const faqQuestion2 = document.getElementById("faq-question-2");
@@ -165,6 +190,34 @@ if (form) {
         currentBookingStep = 1;
     });
 
+    // Form navigation using arrow keys (keydown)
+    form.addEventListener("keydown", function (event) {
+        const formFields = Array.from(form.elements).filter(function (element) {
+            return element.type !== "hidden" && element.offsetParent !== null;
+        });
+        const currentFieldIndex = formFields.indexOf(document.activeElement);
+
+        if (event.key === "ArrowDown") {
+            event.preventDefault();
+            if (currentFieldIndex < formFields.length - 1) {
+                formFields[currentFieldIndex + 1].focus();
+            }
+        } else if (event.key === "ArrowUp") {
+            event.preventDefault();
+            if (currentFieldIndex > 0) {
+                formFields[currentFieldIndex - 1].focus();
+            }
+        } else if (event.key === "ArrowRight") {
+            if (currentBookingStep === 1) {
+                bookingNext.click();
+            }
+        } else if (event.key === "ArrowLeft") {
+            if (currentBookingStep === 2) {
+                bookingBack.click();
+            }
+        }
+    });
+
     form.addEventListener("submit", function (event) {
         event.preventDefault();
         if (currentBookingStep === 1) {
@@ -267,15 +320,24 @@ function generateColor() {
     const randomColor = color[Math.floor(Math.random() * color.length)];
     return randomColor;
 };
-//changing theme to dark (doesn't work on some values and when background color is changed)
+// Changing theme to dark using Bootstrap data-bs-theme
 const themeBtn = document.getElementById("theme-btn");
+
 if (themeBtn) {
-    themeBtn.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
+    themeBtn.addEventListener("click", function () {
+        const currentTheme = document.documentElement.getAttribute("data-bs-theme");
+
+        if (currentTheme === "dark") {
+            document.documentElement.setAttribute("data-bs-theme", "light");
+            document.body.classList.remove("dark-mode");
+            themeBtn.textContent = "🌙 Dark Mode";
+        } else {
+            document.documentElement.setAttribute("data-bs-theme", "dark");
+            document.body.classList.add("dark-mode");
+            document.body.style.backgroundColor = ""; // Reset background color if was changed
+            themeBtn.textContent = "☀️ Light Mode";
+        }
     });
-}
-function switchTheme() {
-    themeBtn.classList.toggle("dark-mode", themeBtn.checkVisibility);
 }
 //star rating system
 let stars = document.getElementsByClassName("star");
@@ -283,6 +345,7 @@ let output = document.getElementById("output");
 function gfg(n) {
     remove();
     for (let i = 0; i < n; i++) {
+        let cls = "";
         if (n == 1) cls = "one";
         else if (n == 2) cls = "two";
         else if (n == 3) cls = "three";
@@ -299,8 +362,3 @@ function remove() {
         i++;
     }
 }
-document.addEventListener('keydown', e => {
-    if (e.key === 'k') {
-        alert("Congrats! You found a secret egg which is keydown function!!")
-    }
-});

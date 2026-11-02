@@ -10,14 +10,31 @@ body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     transition: background-color 0.3s, color 0.3s;
 }
+
+[data-bs-theme="dark"] body,
 body.dark-mode {
-    --primary-dark: #75414e;
-    --secondary-dark: #535f4d;
-    --dark-color: #302c29;
-    --yellowish-color: #e5e9b3;
-    background-color: var(--dark-color);
-    color: var(--yellowish-color);
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #212529;
+    color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .feature-card {
+    background-color: #2b3035;
+    border-color: #495057;
+}
+
+[data-bs-theme="dark"] .hours-table th {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] aside a,
+[data-bs-theme="dark"] aside .link-dark {
+    color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] aside a:hover,
+[data-bs-theme="dark"] aside .link-dark:hover {
+    color: #ffb3c1 !important;
 }
 
 main {
@@ -119,6 +136,12 @@ main {
 
 .reservation-form {
     max-width: 560px;
+}
+
+.reservation-form .btn {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 0.5rem 1.25rem;
 }
 
 .faq-item {
@@ -301,15 +324,7 @@ main {
     cursor: pointer;
     outline: none;
 }
-#theme-btn {
-    display: flex;
-    margin: 0 auto;
-    border: 1px solid #4a3728;
-    border-radius: 1.2rem;
-    background-color: transparent;
-    cursor: pointer;
-    outline: none;
-}
+
 .dark-mode {
     color-scheme: dark;
 }
