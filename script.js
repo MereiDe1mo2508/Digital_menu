@@ -466,3 +466,29 @@ $(document).ready(function() {
         }
     });
 });
+// Search Highlight
+$(document).ready(function () {
+    $("#menu-search").on("keyup", function () {
+        var searchText = $(this).val().trim();
+        $("section li").each(function () {
+            var originalText = $(this).text();
+            $(this).html(originalText);
+        });
+        if (searchText === "") {
+            return;
+        }
+        var escapedText = searchText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        var regex = new RegExp("(" + escapedText + ")", "gi");
+        $("section li").each(function () {
+            var originalText = $(this).text();
+            if (regex.test(originalText)) {
+                regex.lastIndex = 0;
+                var highlightedText = originalText.replace(
+                    regex,
+                    '<span class="highlight">$1</span>'
+                );
+                $(this).html(highlightedText);
+            }
+        });
+    });
+});
