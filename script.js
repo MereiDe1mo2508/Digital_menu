@@ -362,14 +362,6 @@ function remove() {
         i++;
     }
 }
-$(document).on("scroll", function(){
-    var pixels = $(document).scrollTop();
-    var pageHeight = $(document).height() - $(window).height();
-    var progress = 100 * pixels / pageHeight;
-  
-    $("div.progress").css("width", progress + "%");
-});
-
 $(".count").each(function () {
     $(this).prop("Counter",0).animate({
         Counter: $(this).text()
@@ -382,38 +374,32 @@ $(".count").each(function () {
     });
 });
 
-$(document).ready(function() {
-    console.log("jQuery is ready!");
+$(document).on("scroll", function(){
+    var pixels = $(document).scrollTop();
+    var pageHeight = $(document).height() - $(window).height();
+    var progress = 100 * pixels / pageHeight;
+  
+    $("div.progress").css("width", progress + "%");
+});
 
-    // Task 1: Real-time Search and Live Filter (works on both Breakfast and Lunch pages)
-    $("#menu-search").on("keyup input", function () {
-        const searchText = $(this).val().toLowerCase().trim();
-
-        // If search input is empty, restore highlights and all menu items
-        if (searchText === "") {
-            $("#menu-highlights").show();
-            $("section[aria-label*='Full'] .col-md-6").show();
-            $("section[aria-label*='Full'] li").show();
-        } else {
-            // Hide top highlight cards when searching
-            $("#menu-highlights").hide();
-
-            // Filter individual menu items (li) based on search query
-            $("section[aria-label*='Full'] li").filter(function () {
-                const dishText = $(this).text().toLowerCase();
-                $(this).toggle(dishText.indexOf(searchText) > -1);
-            });
-            
-            // Hide empty category sections that have no matching items
-            $("section[aria-label*='Full'] .col-md-6").each(function () {
-                const hasVisibleItems = $(this).find("li:visible").length > 0;
-                $(this).toggle(hasVisibleItems);
-            });
-        }
-    });
-
-    // Task 2: Autocomplete Search Suggestions
-    // Dynamically collect all menu items from the current page (Breakfast or Lunch)
+$("#menu-search").on("keyup input", function () {
+    const searchText = $(this).val().toLowerCase().trim();
+    if (searchText === "") {
+        $("#menu-highlights").show();
+        $("section[aria-label*='Full'] .col-md-6").show();
+        $("section[aria-label*='Full'] li").show();
+    } else {
+        $("#menu-highlights").hide();
+        $("section[aria-label*='Full'] li").filter(function () {
+            const dishText = $(this).text().toLowerCase();
+            $(this).toggle(dishText.indexOf(searchText) > -1);
+        });
+        $("section[aria-label*='Full'] .col-md-6").each(function () {
+            const hasVisibleItems = $(this).find("li:visible").length > 0;
+            $(this).toggle(hasVisibleItems);
+        });
+    }
+});
     const suggestionsList = [];
     $("section[aria-label*='Full'] li").each(function () {
         const dish = $(this).text().trim();
@@ -421,8 +407,6 @@ $(document).ready(function() {
             suggestionsList.push(dish);
         }
     });
-
-    // Display suggestions as the user types
     $("#menu-search").on("input", function () {
         const query = $(this).val().toLowerCase().trim();
         const suggestionsBox = $("#search-suggestions");
@@ -465,8 +449,8 @@ $(document).ready(function() {
             $("#search-suggestions").hide();
         }
     });
-});
-// Search Highlight
+
+
 $(document).ready(function () {
     $("#menu-search").on("keyup", function () {
         var searchText = $(this).val().trim();
