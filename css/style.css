@@ -360,3 +360,9 @@ main {
     font-style: bold;
     font-weight: 400;
 }
+.highlight {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+    padding: 1px;
+}
