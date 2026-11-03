@@ -344,3 +344,13 @@ main {
 .one, .two, .three, .four, .five {
     color: gold;
 }
+.progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 10px;
+    background-color: #d34e6f;
+    transition: all linear 0.1s;
+    min-width: 1%;
+    z-index: 2;
+}
