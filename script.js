@@ -1,3 +1,34 @@
+// Task 7: Show a toast, wait three seconds, then fade it out.
+function showNotification(message) {
+    $("#site-notification").stop(true, true).text(message)
+        .fadeIn(400).delay(3000).fadeOut(400);
+}
+
+// Task 6: Lock the form and show a spinner during a simulated request.
+function submitWithSpinner(formElement, message, onSuccess) {
+    const $form = $(formElement);
+    if ($form.data("submitting")) return;
+
+    const $button = $form.find("button[type='submit']");
+    const originalContent = $button.html();
+    const $enabledFields = $form.find(":input:enabled");
+
+    $form.data("submitting", true).attr("aria-busy", "true");
+    $enabledFields.prop("disabled", true);
+    $button.html('<span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>Please wait...');
+    $form.find("[role='status']").text("Please wait...");
+
+    // Restore the form after 1.5 seconds and show the success message.
+    setTimeout(function () {
+        $enabledFields.prop("disabled", false);
+        $button.html(originalContent);
+        $form.removeData("submitting").removeAttr("aria-busy");
+        $form.find("[role='status']").text(message);
+        showNotification(message);
+        if (onSuccess) onSuccess();
+    }, 1500);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const subscriptionButton = document.querySelector("[data-subscription-target]");
     const contactButton = document.querySelector("[data-contact-target]");
@@ -220,15 +251,17 @@ if (form) {
 
     form.addEventListener("submit", function (event) {
         event.preventDefault();
+        if ($(form).data("submitting")) return;
         if (currentBookingStep === 1) {
             bookingNext.click();
             return;
         }
         const isValid = validateBookingStep1();
         if (isValid) {
-            bookingSuccessSound.currentTime = 0;
-            bookingSuccessSound.play();
-            formStatus.textContent = "Your table request was sent successfully.";
+            submitWithSpinner(form, "Table reservation request sent successfully!", function () {
+                bookingSuccessSound.currentTime = 0;
+                bookingSuccessSound.play().catch(function () {});
+            });
         } else {
             formStatus.textContent = "Please correct the errors above.";
         }
@@ -260,6 +293,7 @@ if (subscriptionForm) {
 
     subscriptionForm.addEventListener("submit", function (event) {
         event.preventDefault();
+        if ($(subscriptionForm).data("submitting")) return;
 
         subscriptionNameError.textContent = "";
         subscriptionEmailError.textContent = "";
@@ -300,7 +334,7 @@ if (subscriptionForm) {
         }
 
         if (isValid) {
-            subscriptionStatus.textContent = "Thank you for subscribing.";
+            submitWithSpinner(subscriptionForm, "Subscribed successfully! Welcome to Bloom Room Cafe.");
         } else {
             subscriptionStatus.textContent = "Please correct the errors above.";
         }
@@ -483,4 +517,72 @@ $(document).ready(function() {
             $("#search-suggestions").hide();
         }
     });
+});
+
+$(document).ready(function () {
+    // Task 8: Copy a contact and show a checkmark with a tooltip.
+    $(".copy-contact").on("click", async function () {
+        const $button = $(this);
+        const text = $button.attr("data-copy");
+        const $tooltip = $button.siblings(".copy-tooltip");
+        const originalText = $button.text();
+        $button.prop("disabled", true);
+
+        try {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+            } else {
+                // Use a temporary field if the Clipboard API is unavailable.
+                const $temporary = $("<textarea>").val(text).addClass("clipboard-buffer").appendTo("body");
+                let copied = false;
+                try {
+                    $temporary[0].select();
+                    copied = document.execCommand("copy");
+                } finally {
+                    $temporary.remove();
+                    $button.trigger("focus");
+                }
+                if (!copied) throw new Error("Copy failed");
+            }
+            $button.text("✔ Copied!");
+            $tooltip.stop(true, true).text("Copied to clipboard!").fadeIn(150);
+            showNotification("Copied to clipboard: " + text);
+        } catch (error) {
+            $tooltip.stop(true, true).text("Copy unavailable. Select the contact text to copy it.").fadeIn(150);
+            showNotification("Could not copy. Please copy the contact text manually.");
+        }
+
+        setTimeout(function () {
+            $button.text(originalText).prop("disabled", false);
+            $tooltip.fadeOut(150);
+        }, 2500);
+    });
+
+    // Task 9: Load data-src images only when they enter the viewport.
+    function loadVisibleImages() {
+        const viewTop = $(window).scrollTop();
+        const viewBottom = viewTop + $(window).height();
+        $("img[data-src]").each(function () {
+            const $image = $(this);
+            if (!$image.is(":visible")) return;
+            const imageTop = $image.offset().top;
+            if (imageTop < viewBottom && imageTop + $image.outerHeight() > viewTop) {
+                $image.attr("src", $image.attr("data-src")).removeAttr("data-src");
+            }
+        });
+    }
+
+    // Check images on scroll, resize, and initial page load.
+    $(window).on("scroll resize", loadVisibleImages);
+    // Load the next slide only when the carousel is on screen.
+    $(".carousel").on("slide.bs.carousel", function (event) {
+        const carouselTop = $(this).offset().top;
+        const viewTop = $(window).scrollTop();
+        if (carouselTop >= viewTop + $(window).height() || carouselTop + $(this).outerHeight() <= viewTop) return;
+        $(event.relatedTarget).find("img[data-src]").each(function () {
+            $(this).attr("src", $(this).attr("data-src")).removeAttr("data-src");
+        });
+    });
+    $(".carousel").on("slid.bs.carousel", loadVisibleImages);
+    loadVisibleImages();
 });

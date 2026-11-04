@@ -366,3 +366,53 @@ main {
     font-weight: bold;
     padding: 1px;
 }
+
+/* Task 7: Fixed toast notification. */
+.site-notification {
+    display: none;
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 1100;
+    max-width: min(420px, calc(100vw - 2.5rem));
+    padding: 1rem 1.25rem;
+    border-left: 5px solid #d8708a;
+    border-radius: 10px;
+    background: #4a3728;
+    color: #fffaf2;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Task 8: Contact copy buttons and confirmation tooltips. */
+.contact-copy-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin: 0.75rem 0;
+}
+
+.copy-control {
+    position: relative;
+}
+
+.copy-tooltip {
+    display: none;
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 8px);
+    width: max-content;
+    max-width: 220px;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    background: #4a3728;
+    color: white;
+    font-size: 0.8rem;
+    z-index: 1;
+}
+
+.clipboard-buffer {
+    position: fixed;
+    left: -9999px;
+}
