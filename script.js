@@ -382,24 +382,56 @@ $(document).on("scroll", function(){
     $("div.progress").css("width", progress + "%");
 });
 
-$("#menu-search").on("keyup input", function () {
-    const searchText = $(this).val().toLowerCase().trim();
-    if (searchText === "") {
-        $("#menu-highlights").show();
-        $("section[aria-label*='Full'] .col-md-6").show();
-        $("section[aria-label*='Full'] li").show();
-    } else {
-        $("#menu-highlights").hide();
-        $("section[aria-label*='Full'] li").filter(function () {
-            const dishText = $(this).text().toLowerCase();
-            $(this).toggle(dishText.indexOf(searchText) > -1);
+$(document).ready(function() {
+    console.log("jQuery is ready!");
+
+    // Task 1 & Task 3: Real-time Search, Live Filter, and Highlighting
+    $("#menu-search").on("keyup input", function () {
+        const searchText = $(this).val().trim();
+        const lowerSearch = searchText.toLowerCase();
+
+        // Reset original text on all items (clears previous highlights)
+        $("section[aria-label*='Full'] li").each(function () {
+            $(this).html($(this).text());
         });
-        $("section[aria-label*='Full'] .col-md-6").each(function () {
-            const hasVisibleItems = $(this).find("li:visible").length > 0;
-            $(this).toggle(hasVisibleItems);
-        });
-    }
-});
+
+        // If search input is empty, restore highlights and all menu items
+        if (lowerSearch === "") {
+            $("#menu-highlights").show();
+            $("section[aria-label*='Full'] .col-md-6").show();
+            $("section[aria-label*='Full'] li").show();
+        } else {
+            // Hide top highlight cards when searching
+            $("#menu-highlights").hide();
+
+            // Prepare safe regular expression for text highlighting
+            const escapedText = searchText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp("(" + escapedText + ")", "gi");
+
+            // Filter individual menu items and highlight matching characters
+            $("section[aria-label*='Full'] li").each(function () {
+                const dishText = $(this).text();
+                const isMatch = dishText.toLowerCase().indexOf(lowerSearch) > -1;
+
+                $(this).toggle(isMatch);
+
+                // Highlight matching characters if item matches
+                if (isMatch) {
+                    const highlighted = dishText.replace(regex, '<span class="highlight">$1</span>');
+                    $(this).html(highlighted);
+                }
+            });
+
+            // Hide empty category sections that have no matching items
+            $("section[aria-label*='Full'] .col-md-6").each(function () {
+                const hasVisibleItems = $(this).find("li:visible").length > 0;
+                $(this).toggle(hasVisibleItems);
+            });
+        }
+    });
+
+    // Task 2: Autocomplete Search Suggestions
+    // Dynamically collect all menu items from the current page (Breakfast or Lunch)
     const suggestionsList = [];
     $("section[aria-label*='Full'] li").each(function () {
         const dish = $(this).text().trim();
@@ -407,10 +439,12 @@ $("#menu-search").on("keyup input", function () {
             suggestionsList.push(dish);
         }
     });
+
+    // Display suggestions as the user types
     $("#menu-search").on("input", function () {
         const query = $(this).val().toLowerCase().trim();
         const suggestionsBox = $("#search-suggestions");
-        
+
         // Clear previous suggestions
         suggestionsBox.empty();
 
@@ -448,31 +482,5 @@ $("#menu-search").on("keyup input", function () {
         if (!$(e.target).closest(".search-section").length) {
             $("#search-suggestions").hide();
         }
-    });
-
-
-$(document).ready(function () {
-    $("#menu-search").on("keyup", function () {
-        var searchText = $(this).val().trim();
-        $("section li").each(function () {
-            var originalText = $(this).text();
-            $(this).html(originalText);
-        });
-        if (searchText === "") {
-            return;
-        }
-        var escapedText = searchText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        var regex = new RegExp("(" + escapedText + ")", "gi");
-        $("section li").each(function () {
-            var originalText = $(this).text();
-            if (regex.test(originalText)) {
-                regex.lastIndex = 0;
-                var highlightedText = originalText.replace(
-                    regex,
-                    '<span class="highlight">$1</span>'
-                );
-                $(this).html(highlightedText);
-            }
-        });
     });
 });
