@@ -385,7 +385,7 @@ $(".count").each(function () {
 $(document).ready(function() {
     console.log("jQuery is ready!");
 
-    // Task 1. Real-time Search and Live Filter
+    // search
     $("#menu-search").on("keyup", function () {
         const searchText = $(this).val().toLowerCase().trim();
 
