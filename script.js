@@ -369,6 +369,7 @@ $(document).on("scroll", function(){
   
     $("div.progress").css("width", progress + "%");
 });
+
 $(".count").each(function () {
     $(this).prop("Counter",0).animate({
         Counter: $(this).text()
@@ -377,6 +378,33 @@ $(".count").each(function () {
         easing: "swing",
         step: function (now) {
             $(this).text(Math.ceil(now));
+        }
+    });
+});
+
+$(document).ready(function() {
+    console.log("jQuery is ready!");
+
+    // Task 1. Real-time Search and Live Filter
+    $("#menu-search").on("keyup", function () {
+        const searchText = $(this).val().toLowerCase().trim();
+
+        if (searchText === "") {
+            $("#menu-highlights").show();
+            $("section[aria-label='Full breakfast menu'] .col-md-6").show();
+            $("section[aria-label='Full breakfast menu'] li").show();
+        } else {
+            $("#menu-highlights").hide();
+
+            $("section[aria-label='Full breakfast menu'] li").filter(function () {
+                const dishText = $(this).text().toLowerCase();
+                $(this).toggle(dishText.indexOf(searchText) > -1);
+            });
+            
+            $("section[aria-label='Full breakfast menu'] .col-md-6").each(function () {
+                const hasVisibleItems = $(this).find("li:visible").length > 0;
+                $(this).toggle(hasVisibleItems);
+            });
         }
     });
 });
