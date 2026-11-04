@@ -53,6 +53,11 @@
             </aside>
 
             <div class="col-md-9">
+                <div class="search-section mb-4 position-relative">
+                    <input type="text" id="menu-search" class="form-control" placeholder="Search lunch menu (e.g. soup, salad, steak)..." autocomplete="off">
+                    <ul id="search-suggestions" class="list-group position-absolute w-100 shadow mt-1" style="display: none; z-index: 1000;"></ul>
+                </div>
+
                 <section id="menu-highlights" aria-labelledby="lunch-title">
                     <h2 id="lunch-title" class="mb-4">Lunch Menu</h2>
                     <div class="row g-4">
