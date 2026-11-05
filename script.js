@@ -1,34 +1,3 @@
-// Task 7: Show a toast, wait three seconds, then fade it out.
-function showNotification(message) {
-    $("#site-notification").stop(true, true).text(message)
-        .fadeIn(400).delay(3000).fadeOut(400);
-}
-
-// Task 6: Lock the form and show a spinner during a simulated request.
-function submitWithSpinner(formElement, message, onSuccess) {
-    const $form = $(formElement);
-    if ($form.data("submitting")) return;
-
-    const $button = $form.find("button[type='submit']");
-    const originalContent = $button.html();
-    const $enabledFields = $form.find(":input:enabled");
-
-    $form.data("submitting", true).attr("aria-busy", "true");
-    $enabledFields.prop("disabled", true);
-    $button.html('<span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>Please wait...');
-    $form.find("[role='status']").text("Please wait...");
-
-    // Restore the form after 1.5 seconds and show the success message.
-    setTimeout(function () {
-        $enabledFields.prop("disabled", false);
-        $button.html(originalContent);
-        $form.removeData("submitting").removeAttr("aria-busy");
-        $form.find("[role='status']").text(message);
-        showNotification(message);
-        if (onSuccess) onSuccess();
-    }, 1500);
-}
-
 document.addEventListener("DOMContentLoaded", () => {
     const subscriptionButton = document.querySelector("[data-subscription-target]");
     const contactButton = document.querySelector("[data-contact-target]");
@@ -396,193 +365,186 @@ function remove() {
         i++;
     }
 }
-$(".count").each(function () {
-    $(this).prop("Counter",0).animate({
-        Counter: $(this).text()
-    }, {
-        duration: 4000,
-        easing: "swing",
-        step: function (now) {
-            $(this).text(Math.ceil(now));
-        }
-    });
-});
 
-$(document).on("scroll", function(){
-    var pixels = $(document).scrollTop();
-    var pageHeight = $(document).height() - $(window).height();
-    var progress = 100 * pixels / pageHeight;
-  
-    $("div.progress").css("width", progress + "%");
-});
+
 
 $(document).ready(function() {
     console.log("jQuery is ready!");
 
-    // Task 1 & Task 3: Real-time Search, Live Filter, and Highlighting
-    $("#menu-search").on("keyup input", function () {
-        const searchText = $(this).val().trim();
-        const lowerSearch = searchText.toLowerCase();
+        // Task 1 & Task 3
+    $("#menu-search").on("keyup", function() {
+        var searchText = $(this).val().trim();
+        var lowerSearch = searchText.toLowerCase();
 
-        // Reset original text on all items (clears previous highlights)
-        $("section[aria-label*='Full'] li").each(function () {
+        $("section[aria-label*='Full'] li").each(function() {
             $(this).html($(this).text());
         });
 
-        // If search input is empty, restore highlights and all menu items
         if (lowerSearch === "") {
             $("#menu-highlights").show();
             $("section[aria-label*='Full'] .col-md-6").show();
             $("section[aria-label*='Full'] li").show();
         } else {
-            // Hide top highlight cards when searching
-            $("#menu-highlights").hide();
+            $("section[aria-label*='Full'] li").each(function() {
+                var dishText = $(this).text();
+                var isMatch = dishText.toLowerCase().indexOf(lowerSearch) > -1;
 
-            // Prepare safe regular expression for text highlighting
-            const escapedText = searchText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const regex = new RegExp("(" + escapedText + ")", "gi");
-
-            // Filter individual menu items and highlight matching characters
-            $("section[aria-label*='Full'] li").each(function () {
-                const dishText = $(this).text();
-                const isMatch = dishText.toLowerCase().indexOf(lowerSearch) > -1;
-
-                $(this).toggle(isMatch);
-
-                // Highlight matching characters if item matches
                 if (isMatch) {
-                    const highlighted = dishText.replace(regex, '<span class="highlight">$1</span>');
+                    $(this).show();
+                    var originalText = $(this).text();
+                    var regex = new RegExp("(" + searchText + ")", "gi");
+                    var highlighted = originalText.replace(regex, "<mark>$1</mark>");
                     $(this).html(highlighted);
+                } else {
+                    $(this).hide();
                 }
             });
 
-            // Hide empty category sections that have no matching items
-            $("section[aria-label*='Full'] .col-md-6").each(function () {
-                const hasVisibleItems = $(this).find("li:visible").length > 0;
-                $(this).toggle(hasVisibleItems);
+            $("section[aria-label*='Full'] .col-md-6").each(function() {
+                var visibleItems = $(this).find("li:visible").length;
+                if (visibleItems > 0) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
             });
         }
     });
 
-    // Task 2: Autocomplete Search Suggestions
-    // Dynamically collect all menu items from the current page (Breakfast or Lunch)
-    const suggestionsList = [];
-    $("section[aria-label*='Full'] li").each(function () {
-        const dish = $(this).text().trim();
-        if (dish && suggestionsList.indexOf(dish) === -1) {
-            suggestionsList.push(dish);
-        }
-    });
-
-    // Display suggestions as the user types
-    $("#menu-search").on("input", function () {
-        const query = $(this).val().toLowerCase().trim();
-        const suggestionsBox = $("#search-suggestions");
-
-        // Clear previous suggestions
-        suggestionsBox.empty();
+    // Task 2
+    $("#menu-search").on("keyup", function() {
+        var query = $(this).val().toLowerCase().trim();
+        var suggestionsBox = $("#search-suggestions");
+        
+        suggestionsBox.empty().hide();
 
         if (query.length > 0) {
-            // Find all matching dishes
-            const matches = suggestionsList.filter(function (dish) {
-                return dish.toLowerCase().indexOf(query) > -1;
+            $("section[aria-label*='Full'] li").each(function() {
+                var dish = $(this).text();
+                
+                if (dish.toLowerCase().indexOf(query) > -1) {
+                    var regex = new RegExp("(" + query + ")", "gi");
+                    var highlightedDish = dish.replace(regex, "<mark>$1</mark>");
+                    
+                    suggestionsBox.append('<li class="list-group-item list-group-item-action" style="cursor: pointer;">' + highlightedDish + '</li>');
+                }
             });
-
-            // If matches found, create and append list items
-            if (matches.length > 0) {
-                matches.forEach(function (dish) {
-                    suggestionsBox.append(
-                        '<li class="list-group-item list-group-item-action" style="cursor: pointer;">' + dish + '</li>'
-                    );
-                });
+            
+            if (suggestionsBox.children().length > 0) {
                 suggestionsBox.show();
-            } else {
-                suggestionsBox.hide();
             }
-        } else {
-            suggestionsBox.hide();
         }
     });
 
-    // When clicking a suggestion, populate search input and trigger filter
-    $(document).on("click", "#search-suggestions li", function () {
-        const chosenDish = $(this).text();
-        $("#menu-search").val(chosenDish).trigger("keyup");
+    $(document).on("click", "#search-suggestions li", function() {
+        var chosenDish = $(this).text().trim(); 
+        
+        $("#menu-search").val(chosenDish);
         $("#search-suggestions").hide();
+        $("#menu-search").trigger("keyup");
+        $("#menu-search").blur();
     });
 
-    // Hide suggestions dropdown when clicking outside the search box
-    $(document).on("click", function (e) {
+    $(document).on("click", function(e) {
         if (!$(e.target).closest(".search-section").length) {
             $("#search-suggestions").hide();
         }
     });
-});
 
-$(document).ready(function () {
-    // Task 8: Copy a contact and show a checkmark with a tooltip.
-    $(".copy-contact").on("click", async function () {
-        const $button = $(this);
-        const text = $button.attr("data-copy");
-        const $tooltip = $button.siblings(".copy-tooltip");
-        const originalText = $button.text();
-        $button.prop("disabled", true);
+    // Task 4
+    $(window).on("scroll", function() {
+        var pixels = $(window).scrollTop();
+        var pageHeight = $(document).height() - $(window).height();
+        var progress = 100 * pixels / pageHeight;
+        
+        $("div.progress").css("width", progress + "%");
+    });
 
-        try {
-            if (navigator.clipboard && window.isSecureContext) {
-                await navigator.clipboard.writeText(text);
-            } else {
-                // Use a temporary field if the Clipboard API is unavailable.
-                const $temporary = $("<textarea>").val(text).addClass("clipboard-buffer").appendTo("body");
-                let copied = false;
-                try {
-                    $temporary[0].select();
-                    copied = document.execCommand("copy");
-                } finally {
-                    $temporary.remove();
-                    $button.trigger("focus");
-                }
-                if (!copied) throw new Error("Copy failed");
+    // Task 5
+    $(".count").each(function() {
+        var $this = $(this);
+        $({ Counter: 0 }).animate({ Counter: $this.text() }, {
+            duration: 4000,
+            step: function() {
+                $this.text(Math.ceil(this.Counter));
             }
-            $button.text("✔ Copied!");
-            $tooltip.stop(true, true).text("Copied to clipboard!").fadeIn(150);
-            showNotification("Copied to clipboard: " + text);
-        } catch (error) {
-            $tooltip.stop(true, true).text("Copy unavailable. Select the contact text to copy it.").fadeIn(150);
-            showNotification("Could not copy. Please copy the contact text manually.");
+        });
+    });
+
+        // Task 6 & Task 7
+    var successSound = new Audio('sounds/success.mp3');
+
+    $("form").on("submit", function(e) {
+        e.preventDefault(); 
+        
+        var $btn = $(this).find("button[type='submit']");
+        var originalText = $btn.text(); 
+        
+        $btn.text("Please wait...").prop("disabled", true);
+        
+        setTimeout(function() {
+            $btn.text(originalText).prop("disabled", false);
+            
+            successSound.play().catch(function(error) {
+                console.log("Звук заблокирован браузером: ", error);
+            });
+
+            $("#site-notification")
+                .text("Table reservation request sent successfully!")
+                .stop(true, true)
+                .fadeIn(400)
+                .delay(3000)
+                .fadeOut(400);
+            
+        }, 2000);
+    });
+
+    // Task 8
+    $(".copy-contact").on("click", function() {
+        var $button = $(this);
+        var text = $button.attr("data-copy");
+        var $tooltip = $button.siblings(".copy-tooltip");
+        var originalText = $button.text();
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(text);
+        } else {
+            var $temp = $("<textarea>").val(text).appendTo("body");
+            $temp[0].select();
+            document.execCommand("copy");
+            $temp.remove();
         }
 
-        setTimeout(function () {
-            $button.text(originalText).prop("disabled", false);
+        $button.text("✔ Copied!");
+        $tooltip.text("Copied to clipboard!").fadeIn(150);
+
+        setTimeout(function() {
+            $button.text(originalText);
             $tooltip.fadeOut(150);
         }, 2500);
     });
 
-    // Task 9: Load data-src images only when they enter the viewport.
+    // Task 9
     function loadVisibleImages() {
-        const viewTop = $(window).scrollTop();
-        const viewBottom = viewTop + $(window).height();
-        $("img[data-src]").each(function () {
-            const $image = $(this);
+        var viewTop = $(window).scrollTop();
+        var viewBottom = viewTop + $(window).height();
+
+        $("img[data-src]").each(function() {
+            var $image = $(this);
+            
             if (!$image.is(":visible")) return;
-            const imageTop = $image.offset().top;
-            if (imageTop < viewBottom && imageTop + $image.outerHeight() > viewTop) {
-                $image.attr("src", $image.attr("data-src")).removeAttr("data-src");
+            
+            var imageTop = $image.offset().top;
+            var imageBottom = imageTop + $image.outerHeight();
+
+            if (imageTop < viewBottom && imageBottom > viewTop) {
+                $image.attr("src", $image.attr("data-src"));
+                $image.removeAttr("data-src");
             }
         });
     }
 
-    // Check images on scroll, resize, and initial page load.
     $(window).on("scroll resize", loadVisibleImages);
-    // Load the next slide only when the carousel is on screen.
-    $(".carousel").on("slide.bs.carousel", function (event) {
-        const carouselTop = $(this).offset().top;
-        const viewTop = $(window).scrollTop();
-        if (carouselTop >= viewTop + $(window).height() || carouselTop + $(this).outerHeight() <= viewTop) return;
-        $(event.relatedTarget).find("img[data-src]").each(function () {
-            $(this).attr("src", $(this).attr("data-src")).removeAttr("data-src");
-        });
-    });
-    $(".carousel").on("slid.bs.carousel", loadVisibleImages);
     loadVisibleImages();
+
 });
