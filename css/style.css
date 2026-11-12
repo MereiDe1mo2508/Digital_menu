@@ -318,11 +318,15 @@ main {
 #changeBg {
     display: flex;
     margin: 0 auto;
-    border: 1px solid #4a3728;
     border-radius: 1.2rem;
-    background-color: transparent;
     cursor: pointer;
-    outline: none;
+}
+
+#theme-btn {
+    display: flex;
+    margin: 0 auto;
+    border-radius: 1.2rem;
+    cursor: pointer;
 }
 
 .dark-mode {
@@ -349,7 +353,7 @@ main {
     top: 0;
     left: 0;
     height: 10px;
-    background-color: #d34e6f;
+    background-color: #fad199;
     transition: all linear 0.1s;
     min-width: 1%;
     z-index: 2;
@@ -415,4 +419,8 @@ main {
 .clipboard-buffer {
     position: fixed;
     left: -9999px;
+}
+#logoutBtn {
+    border-radius: 1.2rem;
+    outline: none;
 }
