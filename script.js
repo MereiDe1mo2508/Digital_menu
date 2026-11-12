@@ -342,6 +342,7 @@ if (themeBtn) {
         }
     });
 }
+    
 //star rating system
 let stars = document.getElementsByClassName("star");
 let output = document.getElementById("output");
@@ -547,4 +548,55 @@ $(document).ready(function() {
     $(window).on("scroll resize", loadVisibleImages);
     loadVisibleImages();
 
+});
+// login and register
+$("registerForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const username = $("registerUser").value;
+    const password = $("registerPassword").value;
+    const confirm_password = $("registerConfirmPassword").value;
+    registerUserError.textContent = "";
+    registerPasswordError.textContent = "";
+    registerConfirmPassword.textContent = "";
+    if(localStorage.getItem(username)) {
+        registerUserError.textContent = "Username is already taken, please create another one!"
+    }
+    if(confirm_password !== password) {
+        registerConfirmPassword.textContent = "Password is not identical, please check your password again"
+    }
+    localStorage.setItem(username, password);
+    alert("Registration successful! You will be redirected to login page.");
+    window.location.href = "login.html"; 
+});
+
+$("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const username = $("loginUser").value;
+    const password = $("loginPassword").value;
+
+    const storedPass = localStorage.getItem(username);
+
+    loginUserError.textContent = "";
+    loginPasswordError.textContent = "";
+
+    if (storedPass !== null && password === storedPass) {
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("currentUser", username);
+
+        alert("You successfully logged in!");
+        window.location.href = "index.html";
+    } else {
+        alert("Invalid username or password!");
+    }
+});
+
+if (localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+
+document.getElementById("logoutBtn").addEventListener("click", function () {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("currentUser");
+    window.location.href = "login.html";
 });
