@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloom Room Cafe - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body class="d-flex flex-column">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger" aria-label="Main navigation">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">Digital Menu</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mainNavigation" aria-controls="mainNavigation"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNavigation">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="login.html">Log in</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <button id="changeBg" class="btn btn-outline-light btn-sm" type="button">Click to change color</button>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <button id="theme-btn" class="btn btn-outline-light btn-sm" type="button">🌙 Dark Mode</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container-fluid flex-grow-1 py-4">
+        <section class="vh-100">
+        <form id="loginForm">
+            <div class="container py-5 h-100 mx-auto">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card bg-white text-dark" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <div class="mb-md-5 mt-md-4 pb-5">
+                        <h2 class="fw-bold mb-2 text-dark">Login</h2>
+                        <p class="text-muted-50 mb-5">Please enter your user and password!</p>
+                        <div data-mdb-input-init class="form-outline form-white mb-4">
+                            <input type="text" id="loginUser" class="form-control form-control-lg" placeholder="User" aria-describedby="loginUserError">
+                            <div id="loginUserError" class="form-text text-danger" aria-live="polite"></div>
+                        </div>
+                        <div data-mdb-input-init class="form-outline form-white mb-4">
+                            <input type="password" id="loginPassword" class="form-control form-control-lg" placeholder="Password" aria-describedby="loginPasswordError">
+                            <div id="loginPasswordError" class="form-text text-danger" aria-live="polite"></div>
+                        </div>
+                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-dark btn-lg px-5" type="submit">Login</button>
+                        </div>
+                        <div>
+                        <p class="mb-0">Don't have an account? <a href="register.html" class="text-muted fw-bold">Sign Up</a>
+                        </p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </form>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</html>
