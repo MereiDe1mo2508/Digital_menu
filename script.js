@@ -550,47 +550,54 @@ $(document).ready(function() {
 
 });
 // login and register
-$("registerForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    const username = $("registerUser").value;
-    const password = $("registerPassword").value;
-    const confirm_password = $("registerConfirmPassword").value;
-    registerUserError.textContent = "";
-    registerPasswordError.textContent = "";
-    registerConfirmPassword.textContent = "";
-    if(localStorage.getItem(username)) {
-        registerUserError.textContent = "Username is already taken, please create another one!"
-    }
-    if(confirm_password !== password) {
-        registerConfirmPassword.textContent = "Password is not identical, please check your password again"
-    }
-    localStorage.setItem(username, password);
-    alert("Registration successful! You will be redirected to login page.");
-    window.location.href = "index.html"; 
-});
-
-$("loginForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const username = $("loginUser").value;
-    const password = $("loginPassword").value;
-
-    const storedPass = localStorage.getItem(username);
-
-    loginUserError.textContent = "";
-    loginPasswordError.textContent = "";
-
-    if (storedPass !== null && password === storedPass) {
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("currentUser", username);
-
-        alert("You successfully logged in!");
-        window.location.href = "homepage.html";
-    } else {
-        alert("Invalid username or password!");
-    }
-});
-
+const register = $("registerForm");
+if (register) {
+    register.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const username = $("registerUser").value;
+        const password = $("registerPassword").value;
+        const confirm_password = $("registerConfirmPassword").value;
+        registerUserError.textContent = "";
+        registerPasswordError.textContent = "";
+        registerConfirmPasswordError.textContent = "";
+        if(localStorage.getItem(username) !== null) {
+            registerUserError.textContent = "Username is already taken, please create another one!"
+            return;
+        }
+        if(confirm_password !== password) {
+            registerConfirmPasswordError.textContent = "Password is not identical, please check your password again"
+            return;
+        }
+        localStorage.setItem(username, password);
+        
+        alert("Registration successful! You will be redirected to login page.");
+        window.location.href = "index.html"; 
+    });
+}
+const login = $("loginForm");
+if (login) {
+    $("loginForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+    
+        const username = $("loginUser").value;
+        const password = $("loginPassword").value;
+    
+        const storedPass = localStorage.getItem(username);
+    
+        loginUserError.textContent = "";
+        loginPasswordError.textContent = "";
+    
+        if (storedPass !== null && password === storedPass) {
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("currentUser", username);
+    
+            alert("You successfully logged in!");
+            window.location.href = "homepage.html";
+        } else {
+            alert("Invalid username or password!");
+        }
+    });
+}
 if (localStorage.getItem("isLoggedIn") !== "true") {
     window.location.href = "login.html";
 }
