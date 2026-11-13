@@ -554,46 +554,50 @@ const register = document.getElementById("registerForm");
 if (register) {
     register.addEventListener("submit", function (e) {
         e.preventDefault();
-        
-        const username = document.getElementById("registerUser").value;
+        const username = document.getElementById("registerUser").value.trim();
         const password = document.getElementById("registerPassword").value;
-        const confirm_password = document.getElementById("registerConfirmPassword").value;
-        registerUserError.textContent = "";
-        registerPasswordError.textContent = "";
-        registerConfirmPasswordError.textContent = "";
-        if(localStorage.getItem(username) !== null) {
-            registerUserError.textContent = "Username is already taken, please create another one!"
+        const confirmPassword = document.getElementById("registerConfirmPassword").value;
+        const userError = document.getElementById("registerUserError");
+        const passwordError = document.getElementById("registerPasswordError");
+        const confirmError = document.getElementById("registerConfirmPasswordError");
+        userError.textContent = "";
+        passwordError.textContent = "";
+        confirmError.textContent = "";
+        if (localStorage.getItem(username) !== null) {
+            userError.textContent = "Username is already taken!";
             return;
         }
-        if(confirm_password !== password) {
-            registerConfirmPasswordError.textContent = "Password is not identical, please check your password again"
+        if (confirmPassword !== password) {
+            confirmError.textContent = "Passwords do not match!";
             return;
         }
         localStorage.setItem(username, password);
-        
         alert("Registration successful! You will be redirected to login page.");
-        window.location.href = "login.html"; 
+        window.location.href = "login.html";
     });
 }
 const login = document.getElementById("loginForm");
 if (login) {
     login.addEventListener("submit", function (e) {
         e.preventDefault();
-    
-        const username = document.getElementById("loginUser").value;
+        const username = document.getElementById("loginUser").value.trim();
         const password = document.getElementById("loginPassword").value;
-    
         const storedPass = localStorage.getItem(username);
-    
-        loginUserError.textContent = "";
-        loginPasswordError.textContent = "";
-    
+        const userError = document.getElementById("loginUserError");
+        const passwordError = document.getElementById("loginPasswordError");
+
+        userError.textContent = "";
+        passwordError.textContent = "";
+
         if (storedPass !== null && password === storedPass) {
+
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("currentUser", username);
-    
+
             alert("You successfully logged in!");
+
             window.location.href = "home.html";
+
         } else {
             alert("Invalid username or password!");
         }
@@ -611,17 +615,22 @@ const currentPage = window.location.pathname
     .split("/")
     .pop()
     .toLowerCase();
- 
-if (protectedPages.includes(currentPage) && localStorage.getItem("isLoggedIn") !== "true") {
-    window.location.href = "login.html";
+
+const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+if (protectedPages.includes(currentPage) && !isLoggedIn) {
+    window.location.replace("login.html");
 }
+
 const logoutBtn = document.getElementById("logoutBtn");
 
 if (logoutBtn) {
     logoutBtn.addEventListener("click", function () {
+
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("currentUser");
 
-        window.location.href = "login.html";
+        window.location.replace("login.html");
     });
 }
+
