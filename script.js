@@ -572,7 +572,7 @@ if (register) {
         localStorage.setItem(username, password);
         
         alert("Registration successful! You will be redirected to login page.");
-        window.location.href = "index.html"; 
+        window.location.href = "login.html"; 
     });
 }
 const login = document.getElementById("loginForm");
@@ -593,18 +593,34 @@ if (login) {
             localStorage.setItem("currentUser", username);
     
             alert("You successfully logged in!");
-            window.location.href = "homepage.html";
+            window.location.href = "home.html";
         } else {
             alert("Invalid username or password!");
         }
     });
 }
-if (localStorage.getItem("isLoggedIn") !== "true") {
+
+const protectedPages = [
+    "home.html",
+    "breakfast.html",
+    "lunch.html"
+];
+
+const currentPage = window.location.pathname
+    .split("/")
+    .pop()
+    .toLowerCase();
+ 
+if (protectedPages.includes(currentPage) &&localStorage.getItem("isLoggedIn") !== "true") {
     window.location.href = "login.html";
 }
+const logoutBtn = document.getElementById("logoutBtn");
 
-document.getElementById("logoutBtn").addEventListener("click", function () {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("currentUser");
-    window.location.href = "login.html";
-});
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", function () {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("currentUser");
+
+        window.location.href = "login.html";
+    });
+}
