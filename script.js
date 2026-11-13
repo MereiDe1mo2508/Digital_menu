@@ -566,7 +566,7 @@ $("registerForm").addEventListener("submit", function (e) {
     }
     localStorage.setItem(username, password);
     alert("Registration successful! You will be redirected to login page.");
-    window.location.href = "login.html"; 
+    window.location.href = "index.html"; 
 });
 
 $("loginForm").addEventListener("submit", function (e) {
@@ -585,7 +585,7 @@ $("loginForm").addEventListener("submit", function (e) {
         localStorage.setItem("currentUser", username);
 
         alert("You successfully logged in!");
-        window.location.href = "index.html";
+        window.location.href = "homepage.html";
     } else {
         alert("Invalid username or password!");
     }
