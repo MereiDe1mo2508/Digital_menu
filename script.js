@@ -603,7 +603,8 @@ if (login) {
 const protectedPages = [
     "home.html",
     "breakfast.html",
-    "lunch.html"
+    "lunch.html",
+    "about.html"
 ];
 
 const currentPage = window.location.pathname
@@ -611,7 +612,7 @@ const currentPage = window.location.pathname
     .pop()
     .toLowerCase();
  
-if (protectedPages.includes(currentPage) &&localStorage.getItem("isLoggedIn") !== "true") {
+if (protectedPages.includes(currentPage) && localStorage.getItem("isLoggedIn") !== "true") {
     window.location.href = "login.html";
 }
 const logoutBtn = document.getElementById("logoutBtn");
