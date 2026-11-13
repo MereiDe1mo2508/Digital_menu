@@ -550,13 +550,14 @@ $(document).ready(function() {
 
 });
 // login and register
-const register = $("registerForm");
+const register = document.getElementById("registerForm");
 if (register) {
     register.addEventListener("submit", function (e) {
         e.preventDefault();
-        const username = $("registerUser").value;
-        const password = $("registerPassword").value;
-        const confirm_password = $("registerConfirmPassword").value;
+        
+        const username = document.getElementById("registerUser").value;
+        const password = document.getElementById("registerPassword").value;
+        const confirm_password = document.getElementById("registerConfirmPassword").value;
         registerUserError.textContent = "";
         registerPasswordError.textContent = "";
         registerConfirmPasswordError.textContent = "";
@@ -574,13 +575,13 @@ if (register) {
         window.location.href = "index.html"; 
     });
 }
-const login = $("loginForm");
+const login = document.getElementById("loginForm");
 if (login) {
-    $("loginForm").addEventListener("submit", function (e) {
+    login.addEventListener("submit", function (e) {
         e.preventDefault();
     
-        const username = $("loginUser").value;
-        const password = $("loginPassword").value;
+        const username = document.getElementById("loginUser").value;
+        const password = document.getElementById("loginPassword").value;
     
         const storedPass = localStorage.getItem(username);
     
