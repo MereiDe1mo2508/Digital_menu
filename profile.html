@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloom Room Cafe - Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <div class="progress"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger" aria-label="Main navigation">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="home.html">Digital Menu</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mainNavigation" aria-controls="mainNavigation"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNavigation">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="breakfast.html">Breakfast</a></li>
+                    <li class="nav-item"><a class="nav-link" href="lunch.html">Lunch</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="profile.html">Profile</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <button id="changeBg" class="btn btn-outline-light btn-sm" type="button">Click to change color</button>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <button id="theme-btn" class="btn btn-outline-light btn-sm" type="button">🌙 Dark Mode</button>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <button id="logoutBtn" class="btn btn-outline-light btn-sm">Log out</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="text-center py-2 border-bottom" id="greeting-banner">
+        <span class="fw-bold text-danger" id="greeting-text"></span>
+    </div>
+
+    <main class="container py-5 flex-grow-1">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <!-- Criterion 5.1: Profile Page displaying stored user details -->
+                <div class="card profile-card p-4 p-md-5 mb-4 shadow-sm border-0">
+                    <div class="d-flex flex-column flex-sm-row align-items-center gap-4 border-bottom pb-4 mb-4 text-center text-sm-start">
+                        <div class="profile-avatar" id="profileAvatarLetter">
+                            <span>🌸</span>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h2 class="fw-bold mb-1" id="profileHeadingName">Guest User</h2>
+                            <p class="text-muted mb-2" id="profileHeadingUsername">@username</p>
+                            <span class="badge bg-danger-subtle text-danger fs-6 px-3 py-2 rounded-pill">
+                                🌸 Bloom Room Club Member
+                            </span>
+                        </div>
+                        <div>
+                            <button id="profileLogoutBtn" class="btn btn-outline-danger">Log Out</button>
+                        </div>
+                    </div>
+
+                    <h3 class="h4 mb-3">Personal Details</h3>
+                    <div class="row g-3 mb-4">
+                        <div class="col-sm-6">
+                            <div class="p-3 border rounded bg-body-tertiary">
+                                <span class="text-muted small d-block">Full Name</span>
+                                <strong id="profileFullName" class="fs-6">Loading...</strong>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-3 border rounded bg-body-tertiary">
+                                <span class="text-muted small d-block">Username</span>
+                                <strong id="profileUsername" class="fs-6">Loading...</strong>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-3 border rounded bg-body-tertiary">
+                                <span class="text-muted small d-block">Email Address</span>
+                                <strong id="profileEmail" class="fs-6">Loading...</strong>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-3 border rounded bg-body-tertiary">
+                                <span class="text-muted small d-block">Phone Number</span>
+                                <strong id="profilePhone" class="fs-6">Loading...</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="h4 mb-3">Member Benefits & Shortcuts</h3>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="card h-100 border text-center p-3">
+                                <span class="fs-2 mb-2">🥞</span>
+                                <h4 class="h6">Breakfast Menu</h4>
+                                <p class="text-muted small mb-3">Fresh omelettes, waffles and pancakes</p>
+                                <a href="breakfast.html" class="btn btn-outline-danger btn-sm mt-auto">View Menu</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100 border text-center p-3">
+                                <span class="fs-2 mb-2">🥗</span>
+                                <h4 class="h6">Lunch Menu</h4>
+                                <p class="text-muted small mb-3">Healthy salads, soups and warm meals</p>
+                                <a href="lunch.html" class="btn btn-outline-danger btn-sm mt-auto">View Menu</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100 border text-center p-3">
+                                <span class="fs-2 mb-2">☕</span>
+                                <h4 class="h6">Book a Table</h4>
+                                <p class="text-muted small mb-3">Reserve the best cozy table in advance</p>
+                                <a href="about.html#booking" class="btn btn-danger btn-sm mt-auto">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark py-3 text-center text-white mt-auto">
+        <div class="container d-flex justify-content-between align-items-center text-body-light">
+            <span>This project was made by Merei Sapar and Assem Ozharova.</span>
+            <div class="footer d-flex gap-2">
+                <ul class="footer-links">
+                    <li>
+                        <button data-subscription-target="#subscription" class="btn footer-link text-light">Subscription</button>
+                    </li>
+                    <li>
+                        <button data-contact-target="#contact" class="btn footer-link text-light">Contact us</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Subscription Popup -->
+    <div class="subscription" id="subscription">
+        <div class="subscription-header">
+            <div class="title">Bloom Room Subscription</div>
+            <button data-close-button class="close-button" aria-label="Close subscription popup">&times;</button>
+        </div>
+        <div class="subscription-body">
+            <form class="reservation-form mx-auto" id="subscription-form" novalidate>
+                <p class="text-muted text-center fw-bold">Get 15% off your next order!</p>
+                <div class="mb-3">
+                    <label for="subscription-email" class="form-label">Email</label>
+                    <input type="text" id="subscription-email" name="email" class="form-control" placeholder="Your email address">
+                    <div id="subscription-email-error" class="form-text text-danger" aria-live="polite"></div>
+                </div>
+                <button type="submit" class="btn btn-danger btn-lg w-100">Subscribe</button>
+                <p id="subscription-form-status" class="mt-3 mb-0" role="status" aria-live="polite"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Popup -->
+    <div class="contact" id="contact">
+        <div class="contact-header">
+            <div class="title">Contact us!</div>
+            <button data-close-button class="close-button" aria-label="Close contact popup">&times;</button>
+        </div>
+        <div class="contact-body">
+            <div class="contact-copy-row">
+                <p class="text-muted">Corporate mail: <span>bloomroom@gmail.com</span></p>
+                <div class="copy-control">
+                    <button type="button" class="btn btn-outline-danger btn-sm copy-contact" data-copy="bloomroom@gmail.com">Copy</button>
+                    <span class="copy-tooltip" role="tooltip"></span>
+                </div>
+            </div>
+            <div class="contact-copy-row">
+                <p class="text-muted">Phone number: <span>785-569-4558</span></p>
+                <div class="copy-control">
+                    <button type="button" class="btn btn-outline-danger btn-sm copy-contact" data-copy="785-569-4558">Copy</button>
+                    <span class="copy-tooltip" role="tooltip"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="popup-overlay"></div>
+
+    <!-- Shared Toast Notification -->
+    <div id="site-notification" class="site-notification" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

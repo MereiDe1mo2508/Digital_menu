@@ -33,6 +33,7 @@
                     <li class="nav-item"><a class="nav-link" href="breakfast.html">Breakfast</a></li>
                     <li class="nav-item"><a class="nav-link" href="lunch.html">Lunch</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
                     <li class="nav-item ms-lg-2">
                         <button id="changeBg" class="btn btn-outline-light btn-sm" type="button">Click to change color</button>
                     </li>
@@ -116,6 +117,32 @@
                     </div>
                 </article>
             </div>
+        </section>
+
+        <!-- Criterion 7: External API Integration (Public Food/Dessert API with loading state and error handling) -->
+        <section class="container pb-5" id="api-specials-section" aria-labelledby="api-specials-title">
+            <div class="text-center mb-4">
+                <span class="badge api-badge px-3 py-2 rounded-pill">Daily Live Specials</span>
+                <h2 id="api-specials-title" class="mt-2">Chef's Fresh Delicacies</h2>
+                <p class="text-muted">Freshly retrieved from our digital culinary API</p>
+            </div>
+            
+            <!-- Loading State Spinner -->
+            <div id="api-loading" class="text-center py-4">
+                <div class="spinner-border text-danger" role="status">
+                    <span class="visually-hidden">Loading specials...</span>
+                </div>
+                <p class="mt-2 text-muted">Loading chef's fresh specials...</p>
+            </div>
+
+            <!-- Error State Container -->
+            <div id="api-error" class="alert alert-warning text-center mx-auto" style="max-width: 500px; display: none;" role="alert">
+                <span>Unable to load specials right now.</span>
+                <button type="button" class="btn btn-sm btn-outline-danger ms-2" id="api-retry-btn">Try Again</button>
+            </div>
+
+            <!-- Dynamic Specials Cards Grid -->
+            <div id="api-specials-container" class="row g-4" style="display: none;"></div>
         </section>
     </main>
 

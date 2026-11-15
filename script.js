@@ -323,23 +323,32 @@ function generateColor() {
     const randomColor = color[Math.floor(Math.random() * color.length)];
     return randomColor;
 };
-// Changing theme to dark using Bootstrap data-bs-theme
-const themeBtn = document.getElementById("theme-btn");
+// Criterion 3: Light and Dark Modes with localStorage persistence
+function applyTheme(theme) {
+    const themeBtn = document.getElementById("theme-btn");
+    if (theme === "dark") {
+        document.documentElement.setAttribute("data-bs-theme", "dark");
+        document.body.classList.add("dark-mode");
+        if (themeBtn) themeBtn.textContent = "☀️ Light Mode";
+    } else {
+        document.documentElement.setAttribute("data-bs-theme", "light");
+        document.body.classList.remove("dark-mode");
+        if (themeBtn) themeBtn.textContent = "🌙 Dark Mode";
+    }
+}
 
+// Read saved theme from localStorage on load
+const savedTheme = localStorage.getItem("theme") || "light";
+applyTheme(savedTheme);
+
+const themeBtn = document.getElementById("theme-btn");
 if (themeBtn) {
     themeBtn.addEventListener("click", function () {
         const currentTheme = document.documentElement.getAttribute("data-bs-theme");
-
-        if (currentTheme === "dark") {
-            document.documentElement.setAttribute("data-bs-theme", "light");
-            document.body.classList.remove("dark-mode");
-            themeBtn.textContent = "🌙 Dark Mode";
-        } else {
-            document.documentElement.setAttribute("data-bs-theme", "dark");
-            document.body.classList.add("dark-mode");
-            document.body.style.backgroundColor = ""; // Reset background color if was changed
-            themeBtn.textContent = "☀️ Light Mode";
-        }
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        localStorage.setItem("theme", newTheme);
+        document.body.style.backgroundColor = ""; // Reset custom background color if changed
+        applyTheme(newTheme);
     });
 }
     
@@ -549,88 +558,401 @@ $(document).ready(function() {
     loadVisibleImages();
 
 });
-// login and register
-const register = document.getElementById("registerForm");
-if (register) {
-    register.addEventListener("submit", function (e) {
+// ==========================================
+// Criterion 5.1 & 5.2: Authentication Simulation & Form Validation
+// ==========================================
+
+// Helper: Show notification toast
+function showNotification(message) {
+    const $notif = $("#site-notification");
+    if ($notif.length) {
+        $notif.text(message).stop(true, true).fadeIn(300).delay(3000).fadeOut(300);
+    }
+}
+
+// ------------------------------------------
+// Registration Form
+// ------------------------------------------
+const registerForm = document.getElementById("registerForm");
+
+if (registerForm) {
+    registerForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        const username = document.getElementById("registerUser").value.trim();
-        const password = document.getElementById("registerPassword").value;
-        const confirmPassword = document.getElementById("registerConfirmPassword").value;
+
+        // Inputs
+        const nameInput = document.getElementById("registerName");
+        const emailInput = document.getElementById("registerEmail");
+        const phoneInput = document.getElementById("registerPhone");
+        const userInput = document.getElementById("registerUser");
+        const passwordInput = document.getElementById("registerPassword");
+        const confirmPasswordInput = document.getElementById("registerConfirmPassword");
+
+        // Error message containers
+        const nameError = document.getElementById("registerNameError");
+        const emailError = document.getElementById("registerEmailError");
+        const phoneError = document.getElementById("registerPhoneError");
         const userError = document.getElementById("registerUserError");
         const passwordError = document.getElementById("registerPasswordError");
         const confirmError = document.getElementById("registerConfirmPasswordError");
+        const statusMsg = document.getElementById("registerFormStatus");
+
+        // Reset errors
+        nameError.textContent = "";
+        emailError.textContent = "";
+        phoneError.textContent = "";
         userError.textContent = "";
         passwordError.textContent = "";
         confirmError.textContent = "";
-        if (localStorage.getItem(username) !== null) {
-            userError.textContent = "Username is already taken!";
-            return;
+        statusMsg.textContent = "";
+
+        let isValid = true;
+
+        const fullName = nameInput ? nameInput.value.trim() : "";
+        const email = emailInput ? emailInput.value.trim() : "";
+        const phone = phoneInput ? phoneInput.value.trim() : "";
+        const username = userInput ? userInput.value.trim() : "";
+        const password = passwordInput ? passwordInput.value : "";
+        const confirmPassword = confirmPasswordInput ? confirmPasswordInput.value : "";
+
+        // 1. Validate Full Name
+        if (fullName === "") {
+            nameError.textContent = "Full name is required.";
+            isValid = false;
+        } else if (fullName.length < 2) {
+            nameError.textContent = "Name must be at least 2 characters.";
+            isValid = false;
         }
-        if (confirmPassword !== password) {
-            confirmError.textContent = "Passwords do not match!";
-            return;
+
+        // 2. Validate Email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+        if (email === "") {
+            emailError.textContent = "Email is required.";
+            isValid = false;
+        } else if (!emailRegex.test(email)) {
+            emailError.textContent = "Please enter a valid email address (e.g. name@example.com).";
+            isValid = false;
         }
-        localStorage.setItem(username, password);
-        alert("Registration successful! You will be redirected to login page.");
-        window.location.href = "login.html";
+
+        // 3. Validate Phone Number pattern
+        const phoneRegex = /^(\+?[0-9]{10,15}|[0-9]{3}[-\s]?[0-9]{3}[-\s]?[0-9]{4})$/;
+        if (phone === "") {
+            phoneError.textContent = "Phone number is required.";
+            isValid = false;
+        } else if (!phoneRegex.test(phone)) {
+            phoneError.textContent = "Please enter a valid phone number (e.g. +7 777 123 4567).";
+            isValid = false;
+        }
+
+        // 4. Validate Username
+        if (username === "") {
+            userError.textContent = "Username is required.";
+            isValid = false;
+        } else if (username.length < 3) {
+            userError.textContent = "Username must be at least 3 characters.";
+            isValid = false;
+        } else if (localStorage.getItem("user_" + username.toLowerCase()) !== null || localStorage.getItem(username) !== null) {
+            userError.textContent = "This username is already taken. Please choose another.";
+            isValid = false;
+        }
+
+        // 5. Validate Password length and complexity
+        const passwordComplexityRegex = /^(?=.*[A-Za-z])(?=.*\d).{6,}$/;
+        if (password === "") {
+            passwordError.textContent = "Password is required.";
+            isValid = false;
+        } else if (!passwordComplexityRegex.test(password)) {
+            passwordError.textContent = "Password must be at least 6 characters and include both letters and numbers.";
+            isValid = false;
+        }
+
+        // 6. Confirm Password match
+        if (confirmPassword === "") {
+            confirmError.textContent = "Please confirm your password.";
+            isValid = false;
+        } else if (password !== confirmPassword) {
+            confirmError.textContent = "Passwords do not match.";
+            isValid = false;
+        }
+
+        if (isValid) {
+            // Save user profile object in localStorage
+            const userProfile = {
+                fullName: fullName,
+                email: email,
+                phone: phone,
+                username: username,
+                password: password,
+                createdAt: new Date().toLocaleDateString()
+            };
+
+            localStorage.setItem("user_" + username.toLowerCase(), JSON.stringify(userProfile));
+            localStorage.setItem(username, password); // Backward compatibility
+
+            statusMsg.className = "mb-3 text-center fw-semibold text-success";
+            statusMsg.textContent = "Registration successful! Redirecting to login page...";
+
+            showNotification("Registration successful! Welcome to Bloom Room Cafe.");
+
+            setTimeout(function () {
+                window.location.href = "login.html";
+            }, 1200);
+        } else {
+            statusMsg.className = "mb-3 text-center fw-semibold text-danger";
+            statusMsg.textContent = "Please correct the errors above.";
+        }
     });
 }
-const login = document.getElementById("loginForm");
-if (login) {
-    login.addEventListener("submit", function (e) {
+
+// ------------------------------------------
+// Login Form
+// ------------------------------------------
+const loginForm = document.getElementById("loginForm");
+
+if (loginForm) {
+    loginForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        const username = document.getElementById("loginUser").value.trim();
-        const password = document.getElementById("loginPassword").value;
-        const storedPass = localStorage.getItem(username);
+
+        const userInput = document.getElementById("loginUser");
+        const passwordInput = document.getElementById("loginPassword");
         const userError = document.getElementById("loginUserError");
         const passwordError = document.getElementById("loginPasswordError");
+        const statusMsg = document.getElementById("loginFormStatus");
 
         userError.textContent = "";
         passwordError.textContent = "";
+        statusMsg.textContent = "";
 
-        if (storedPass !== null && password === storedPass) {
+        const query = userInput ? userInput.value.trim() : "";
+        const password = passwordInput ? passwordInput.value : "";
 
+        let isValid = true;
+
+        if (query === "") {
+            userError.textContent = "Please enter your username or email.";
+            isValid = false;
+        }
+
+        if (password === "") {
+            passwordError.textContent = "Please enter your password.";
+            isValid = false;
+        }
+
+        if (!isValid) return;
+
+        // Check credentials against stored profiles
+        let matchedUser = null;
+
+        // Check directly by username key
+        const directProfileJson = localStorage.getItem("user_" + query.toLowerCase());
+        if (directProfileJson) {
+            try {
+                const parsed = JSON.parse(directProfileJson);
+                if (parsed.password === password) {
+                    matchedUser = parsed;
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // Check by simple username or search by email
+        if (!matchedUser) {
+            const fallbackPass = localStorage.getItem(query);
+            if (fallbackPass === password) {
+                matchedUser = {
+                    username: query,
+                    fullName: query,
+                    email: query.includes("@") ? query : query + "@example.com",
+                    phone: "+7 777 000 0000"
+                };
+            } else {
+                // Search across all stored user profiles
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key && key.startsWith("user_")) {
+                        try {
+                            const candidate = JSON.parse(localStorage.getItem(key));
+                            if (candidate && (candidate.username.toLowerCase() === query.toLowerCase() || candidate.email.toLowerCase() === query.toLowerCase())) {
+                                if (candidate.password === password) {
+                                    matchedUser = candidate;
+                                    break;
+                                }
+                            }
+                        } catch (err) {
+                            // continue
+                        }
+                    }
+                }
+            }
+        }
+
+        if (matchedUser) {
             localStorage.setItem("isLoggedIn", "true");
-            localStorage.setItem("currentUser", username);
+            localStorage.setItem("currentUser", matchedUser.username);
 
-            alert("You successfully logged in!");
+            statusMsg.className = "mb-3 text-center fw-semibold text-success";
+            statusMsg.textContent = "Login successful! Redirecting to your Profile...";
 
-            window.location.href = "home.html";
+            showNotification("Welcome back, " + (matchedUser.fullName || matchedUser.username) + "!");
 
+            // Criterion 5.1: "Log In" checks credentials and redirects to a Profile Page
+            setTimeout(function () {
+                window.location.href = "profile.html";
+            }, 1000);
         } else {
-            alert("Invalid username or password!");
+            statusMsg.className = "mb-3 text-center fw-semibold text-danger";
+            statusMsg.textContent = "Invalid username/email or password.";
         }
     });
 }
 
-const protectedPages = [
-    "home.html",
-    "breakfast.html",
-    "lunch.html",
-    "about.html"
-];
-
-const currentPage = window.location.pathname
-    .split("/")
-    .pop()
-    .toLowerCase();
-
+// ------------------------------------------
+// Profile Page Population (Criterion 5.1)
+// ------------------------------------------
+const currentPage = window.location.pathname.split("/").pop().toLowerCase();
 const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
-if (protectedPages.includes(currentPage) && !isLoggedIn) {
-    window.location.replace("login.html");
-}
-
-const logoutBtn = document.getElementById("logoutBtn");
-
-if (logoutBtn) {
-    logoutBtn.addEventListener("click", function () {
-
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("currentUser");
-
+if (currentPage === "profile.html") {
+    // Protected route: redirect to login if not logged in
+    if (!isLoggedIn) {
         window.location.replace("login.html");
-    });
+    } else {
+        const currentUsername = localStorage.getItem("currentUser") || "Guest";
+        let userProfile = null;
+
+        const storedProfile = localStorage.getItem("user_" + currentUsername.toLowerCase());
+        if (storedProfile) {
+            try {
+                userProfile = JSON.parse(storedProfile);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        const fullName = userProfile && userProfile.fullName ? userProfile.fullName : currentUsername;
+        const email = userProfile && userProfile.email ? userProfile.email : (currentUsername + "@example.com");
+        const phone = userProfile && userProfile.phone ? userProfile.phone : "+7 777 123 4567";
+        const initial = fullName.charAt(0).toUpperCase();
+
+        const headingName = document.getElementById("profileHeadingName");
+        const headingUsername = document.getElementById("profileHeadingUsername");
+        const fullNameEl = document.getElementById("profileFullName");
+        const usernameEl = document.getElementById("profileUsername");
+        const emailEl = document.getElementById("profileEmail");
+        const phoneEl = document.getElementById("profilePhone");
+        const avatarEl = document.getElementById("profileAvatarLetter");
+
+        if (headingName) headingName.textContent = fullName;
+        if (headingUsername) headingUsername.textContent = "@" + currentUsername;
+        if (fullNameEl) fullNameEl.textContent = fullName;
+        if (usernameEl) usernameEl.textContent = currentUsername;
+        if (emailEl) emailEl.textContent = email;
+        if (phoneEl) phoneEl.textContent = phone;
+        if (avatarEl) avatarEl.innerHTML = `<span>${initial}</span>`;
+    }
 }
+
+// ------------------------------------------
+// Logout Handlers
+// ------------------------------------------
+function performLogout() {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("currentUser");
+    showNotification("You have been logged out.");
+    setTimeout(function () {
+        window.location.replace("login.html");
+    }, 600);
+}
+
+$(document).on("click", "#logoutBtn, #profileLogoutBtn", function (e) {
+    e.preventDefault();
+    performLogout();
+});
+
+// Update navbar auth link visibility if present
+if (isLoggedIn) {
+    const currentUsername = localStorage.getItem("currentUser") || "User";
+    const $loginLinks = $("nav a[href='login.html']");
+    if ($loginLinks.length) {
+        $loginLinks.text("Profile (" + currentUsername + ")").attr("href", "profile.html");
+    }
+}
+
+// ==========================================
+// Criterion 7: External API Integration (TheMealDB)
+// ==========================================
+async function loadChefSpecials() {
+    const $section = $("#api-specials-section");
+    const $loading = $("#api-loading");
+    const $error = $("#api-error");
+    const $container = $("#api-specials-container");
+
+    if (!$section.length) return;
+
+    $loading.show();
+    $error.hide();
+    $container.hide().empty();
+
+    try {
+        // Fetch fresh desserts / chef specials from public TheMealDB API
+        const response = await fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert");
+        if (!response.ok) {
+            throw new Error("HTTP request failed with status " + response.status);
+        }
+
+        const data = await response.json();
+        const specials = data.meals ? data.meals.slice(0, 3) : [];
+
+        if (specials.length === 0) {
+            throw new Error("No specials returned from API");
+        }
+
+        specials.forEach(function (meal) {
+            const cardHtml = `
+                <div class="col-12 col-md-4">
+                    <article class="card h-100 shadow-sm border-0">
+                        <div class="ratio ratio-4x3">
+                            <img src="${meal.strMealThumb}" class="d-block w-100 object-fit-cover rounded-top" alt="${meal.strMeal}">
+                        </div>
+                        <div class="card-body d-flex flex-column p-4">
+                            <span class="badge api-badge align-self-start mb-2 px-3 py-1 rounded-pill">Chef's Fresh Special</span>
+                            <h3 class="card-title h5 mb-2">${meal.strMeal}</h3>
+                            <p class="card-text text-muted small">Special artisanal dessert prepared fresh today in our kitchen.</p>
+                            <button type="button" class="btn btn-outline-danger btn-sm mt-auto align-self-start order-special-btn" data-dish="${meal.strMeal}">
+                                Order Today
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            `;
+            $container.append(cardHtml);
+        });
+
+        $loading.hide();
+        $container.fadeIn(400);
+    } catch (err) {
+        console.warn("External API fetch error:", err);
+        $loading.hide();
+        $error.fadeIn(300);
+    }
+}
+
+// Trigger API load on page load if the section exists
+$(document).ready(function () {
+    if ($("#api-specials-section").length) {
+        loadChefSpecials();
+    }
+});
+
+// Retry button for API error state
+$(document).on("click", "#api-retry-btn", function () {
+    loadChefSpecials();
+});
+
+// Ordering special dish triggers toast notification
+$(document).on("click", ".order-special-btn", function () {
+    const dish = $(this).attr("data-dish") || "Special item";
+    showNotification(`Added "${dish}" to your order! 🌸`);
+});
+
 

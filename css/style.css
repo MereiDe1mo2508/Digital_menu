@@ -424,3 +424,69 @@ main {
     border-radius: 1.2rem;
     outline: none;
 }
+
+/* Criterion 6: Animated Button & UI Effects */
+.btn {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.feature-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Profile Page Styling */
+.profile-card {
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.profile-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d8708a, #d8b270);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(216, 112, 138, 0.4);
+}
+
+/* External API Section Styling */
+.api-badge {
+    background-color: #fae8f3;
+    color: #d8708a;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+[data-bs-theme="dark"] .api-badge {
+    background-color: #4a2835;
+    color: #ff9bbb;
+}
+

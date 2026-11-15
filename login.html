@@ -9,10 +9,10 @@
     <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
     <script src="script.js" defer></script>
 </head>
-<body class="d-flex flex-column">
+<body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger" aria-label="Main navigation">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="login.html">Digital Menu</a>
+            <a class="navbar-brand fw-bold" href="home.html">Digital Menu</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#mainNavigation" aria-controls="mainNavigation"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -20,6 +20,10 @@
             </button>
             <div class="collapse navbar-collapse" id="mainNavigation">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="breakfast.html">Breakfast</a></li>
+                    <li class="nav-item"><a class="nav-link" href="lunch.html">Lunch</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="login.html">Log in</a></li>
                     <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
                     <li class="nav-item ms-lg-2">
@@ -32,39 +36,56 @@
             </div>
         </div>
     </nav>
-    <main class="container-fluid flex-grow-1 py-4">
-        <section class="vh-100">
-        <form id="loginForm">
-            <div class="container py-5 h-100 mx-auto">
-                <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    <div class="card bg-white text-dark" style="border-radius: 1rem;">
-                    <div class="card-body p-5 text-center">
-                        <div class="mb-md-5 mt-md-4 pb-5">
-                        <h2 class="fw-bold mb-2 text-dark">Login</h2>
-                        <p class="text-muted-50 mb-5">Please enter your user and password!</p>
-                        <div data-mdb-input-init class="form-outline form-white mb-4">
-                            <input type="text" id="loginUser" class="form-control form-control-lg" placeholder="User" aria-describedby="loginUserError">
-                            <div id="loginUserError" class="form-text text-danger" aria-live="polite"></div>
+
+    <main class="container py-5 flex-grow-1">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-5">
+                <div class="card shadow-sm border-0 rounded-4">
+                    <div class="card-body p-4 p-md-5">
+                        <div class="text-center mb-4">
+                            <span class="fs-1">🌸</span>
+                            <h2 class="fw-bold mt-2">Welcome Back</h2>
+                            <p class="text-muted">Log in to view your profile and orders</p>
                         </div>
-                        <div data-mdb-input-init class="form-outline form-white mb-4">
-                            <input type="password" id="loginPassword" class="form-control form-control-lg" placeholder="Password" aria-describedby="loginPasswordError">
-                            <div id="loginPasswordError" class="form-text text-danger" aria-live="polite"></div>
-                        </div>
-                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-dark btn-lg px-5" type="submit">Login</button>
-                        </div>
-                        <div>
-                        <p class="mb-0">Don't have an account? <a href="register.html" class="text-muted fw-bold">Sign Up</a>
-                        </p>
-                        </div>
+
+                        <!-- Criterion 5.2: Form Validation with novalidate and no HTML validation attributes -->
+                        <form id="loginForm" novalidate>
+                            <div class="mb-3">
+                                <label for="loginUser" class="form-label">Username or Email</label>
+                                <input type="text" id="loginUser" name="user" class="form-control" placeholder="Enter username or email">
+                                <div id="loginUserError" class="form-text text-danger" aria-live="polite"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Password</label>
+                                <input type="password" id="loginPassword" name="password" class="form-control" placeholder="Enter password">
+                                <div id="loginPasswordError" class="form-text text-danger" aria-live="polite"></div>
+                            </div>
+
+                            <div id="loginFormStatus" class="mb-3 text-center fw-semibold" role="status" aria-live="polite"></div>
+
+                            <button type="submit" id="loginSubmitBtn" class="btn btn-danger btn-lg w-100">Log In</button>
+
+                            <div class="text-center mt-4">
+                                <p class="mb-1 text-muted">Don't have an account? <a href="register.html" class="fw-bold text-danger text-decoration-none">Sign Up</a></p>
+                                <p class="mb-0"><a href="home.html" class="text-muted small">Continue as guest to Menu →</a></p>
+                            </div>
+                        </form>
                     </div>
-                    </div>
-                </div>
                 </div>
             </div>
-        </form>
-        </section>
+        </div>
     </main>
+
+    <footer class="bg-dark py-3 text-center text-white mt-auto">
+        <div class="container d-flex justify-content-between align-items-center text-body-light">
+            <span>This project was made by Merei Sapar and Assem Ozharova.</span>
+            <span class="text-muted small">Bloom Room Cafe © 2026</span>
+        </div>
+    </footer>
+
+    <!-- Shared Toast Notification -->
+    <div id="site-notification" class="site-notification" role="status" aria-live="polite" aria-atomic="true"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
