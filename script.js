@@ -113,6 +113,40 @@ if (faqQuestion3) {
 }
 
 
+// Helper: Show site notification toast
+function showNotification(message) {
+    const $notif = $("#site-notification");
+    if ($notif.length) {
+        $notif.text(message).stop(true, true).fadeIn(300).delay(3000).fadeOut(300);
+    }
+}
+
+// Helper: Submit form with loading spinner
+function submitWithSpinner(formElement, notificationMessage, callback) {
+    const $form = $(formElement);
+    const $submitBtn = $form.find("button[type='submit']");
+    if (!$submitBtn.length) return;
+
+    const originalBtnText = $submitBtn.text();
+    $form.data("submitting", true);
+    $submitBtn.prop("disabled", true).html(
+        '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Please wait...'
+    );
+
+    setTimeout(function () {
+        $submitBtn.prop("disabled", false).text(originalBtnText);
+        $form.data("submitting", false);
+
+        if (notificationMessage) {
+            showNotification(notificationMessage);
+        }
+
+        if (typeof callback === "function") {
+            callback();
+        }
+    }, 1500);
+}
+
 const form = document.getElementById("contact-form");
 
 if (form) {
@@ -481,33 +515,7 @@ $(document).ready(function() {
         });
     });
 
-        // Task 6 & Task 7
-    var successSound = new Audio('sounds/success.mp3');
-
-    $("form").on("submit", function(e) {
-        e.preventDefault(); 
-        
-        var $btn = $(this).find("button[type='submit']");
-        var originalText = $btn.text(); 
-        
-        $btn.text("Please wait...").prop("disabled", true);
-        
-        setTimeout(function() {
-            $btn.text(originalText).prop("disabled", false);
-            
-            successSound.play().catch(function(error) {
-                console.log("Звук заблокирован браузером: ", error);
-            });
-
-            $("#site-notification")
-                .text("Table reservation request sent successfully!")
-                .stop(true, true)
-                .fadeIn(400)
-                .delay(3000)
-                .fadeOut(400);
-            
-        }, 2000);
-    });
+        // Task 6 & Task 7 (Handled via submitWithSpinner and form validation)
 
     // Task 8
     $(".copy-contact").on("click", function() {
@@ -561,14 +569,6 @@ $(document).ready(function() {
 // ==========================================
 // Criterion 5.1 & 5.2: Authentication Simulation & Form Validation
 // ==========================================
-
-// Helper: Show notification toast
-function showNotification(message) {
-    const $notif = $("#site-notification");
-    if ($notif.length) {
-        $notif.text(message).stop(true, true).fadeIn(300).delay(3000).fadeOut(300);
-    }
-}
 
 // ------------------------------------------
 // Registration Form

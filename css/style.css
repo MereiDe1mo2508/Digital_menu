@@ -13,13 +13,37 @@ body {
 
 [data-bs-theme="dark"] body,
 body.dark-mode {
-    background-color: #212529;
+    background-color: #1a1d20;
     color: #f8f9fa;
 }
 
+/* Dark Mode Card & Box Outlines (Issue 2 fix) */
+[data-bs-theme="dark"] .card,
+[data-bs-theme="dark"] .profile-card,
 [data-bs-theme="dark"] .feature-card {
-    background-color: #2b3035;
-    border-color: #495057;
+    background-color: #262a2f !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-bs-theme="dark"] .card:hover,
+[data-bs-theme="dark"] .feature-card:hover {
+    border-color: rgba(216, 112, 138, 0.6) !important;
+}
+
+/* Inner sub-boxes on profile and details */
+[data-bs-theme="dark"] .bg-body-tertiary,
+[data-bs-theme="dark"] .profile-card .border {
+    background-color: #1e2125 !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Footer outline and contrast separation in Dark Mode */
+[data-bs-theme="dark"] footer,
+[data-bs-theme="dark"] .bg-dark {
+    background-color: #121416 !important;
+    border-top: 2px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.4);
 }
 
 [data-bs-theme="dark"] .hours-table th {
@@ -35,6 +59,21 @@ body.dark-mode {
 [data-bs-theme="dark"] aside a:hover,
 [data-bs-theme="dark"] aside .link-dark:hover {
     color: #ffb3c1 !important;
+}
+
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select {
+    background-color: #1e2125;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .form-control:focus,
+[data-bs-theme="dark"] .form-select:focus {
+    background-color: #24282d;
+    border-color: #d8708a;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.25rem rgba(216, 112, 138, 0.25);
 }
 
 main {
