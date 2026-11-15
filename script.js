@@ -923,14 +923,49 @@ $(document).on("click", "#logoutBtn, #profileLogoutBtn", function (e) {
     performLogout();
 });
 
-// Update navbar auth link visibility if present
-if (isLoggedIn) {
+// ------------------------------------------
+// Dynamic Navbar Authentication State
+// ------------------------------------------
+function updateNavbarAuth() {
+    const isUserLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const currentUsername = localStorage.getItem("currentUser") || "User";
-    const $loginLinks = $("nav a[href='login.html']");
-    if ($loginLinks.length) {
-        $loginLinks.text("Profile (" + currentUsername + ")").attr("href", "profile.html");
+
+    if (isUserLoggedIn) {
+        // Logged-in user: show logout button
+        $("#logoutBtn").show();
+
+        // Convert login link to profile with user's name
+        $("nav a[href='login.html']").each(function () {
+            $(this).text("Profile (" + currentUsername + ")").attr("href", "profile.html");
+        });
+
+        // Hide register link in navbar when already logged in
+        $("nav a[href='register.html']").parent().hide();
+
+        // Ensure profile link is visible
+        $("nav a[href='profile.html']").each(function () {
+            $(this).text("Profile (" + currentUsername + ")");
+            $(this).parent().show();
+        });
+    } else {
+        // Guest user: hide logout button completely
+        $("#logoutBtn").hide();
+
+        // If a profile link exists in navbar, show "Log in" instead for guests
+        $("nav a[href='profile.html']").each(function () {
+            $(this).text("Log in").attr("href", "login.html");
+        });
+
+        // Ensure login and register links are visible for guests
+        $("nav a[href='login.html'], nav a[href='register.html']").parent().show();
     }
 }
+
+// Initialize navbar state immediately on page load
+$(document).ready(function () {
+    updateNavbarAuth();
+});
+updateNavbarAuth();
 
 // ==========================================
 // Criterion 7: External API Integration (TheMealDB)
