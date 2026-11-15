@@ -990,7 +990,15 @@ async function loadChefSpecials() {
         }
 
         const data = await response.json();
-        const specials = data.meals ? data.meals.slice(0, 3) : [];
+        
+        // Pick 3 random desserts from the API so different dishes appear on each visit
+        let specials = [];
+        if (data.meals && data.meals.length > 0) {
+            const shuffledMeals = data.meals.slice().sort(function () {
+                return 0.5 - Math.random();
+            });
+            specials = shuffledMeals.slice(0, 3);
+        }
 
         if (specials.length === 0) {
             throw new Error("No specials returned from API");
@@ -1033,8 +1041,8 @@ $(document).ready(function () {
     }
 });
 
-// Retry button for API error state
-$(document).on("click", "#api-retry-btn", function () {
+// Retry or Refresh button for API specials
+$(document).on("click", "#api-retry-btn, #api-refresh-btn", function () {
     loadChefSpecials();
 });
 
