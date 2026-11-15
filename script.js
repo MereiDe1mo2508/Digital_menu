@@ -180,6 +180,36 @@ if (form) {
     bookingTime.addEventListener("change", updateBookingTimeInfo);
     updateBookingTimeInfo();
 
+    // Auto-fill booking form with current logged-in user profile details
+    function autofillBookingForm() {
+        if (localStorage.getItem("isLoggedIn") === "true") {
+            const currentUsername = localStorage.getItem("currentUser");
+            if (currentUsername) {
+                let profileData = null;
+                try {
+                    profileData = JSON.parse(localStorage.getItem("user_" + currentUsername.toLowerCase()));
+                } catch (e) {}
+
+                const autoName = profileData && profileData.fullName ? profileData.fullName : currentUsername;
+                const autoEmail = profileData && profileData.email ? profileData.email : "";
+
+                if (nameInput) nameInput.value = autoName;
+                if (emailInput) emailInput.value = autoEmail;
+
+                if (!$("#booking-auto-notice").length) {
+                    const noticeHtml = `
+                        <div id="booking-auto-notice" class="alert alert-success py-2 px-3 small d-flex align-items-center justify-content-between mb-3 rounded-3">
+                            <span>🌸 Booking as: <strong>${autoName}</strong></span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle">Auto-filled</span>
+                        </div>
+                    `;
+                    $("#booking-step-1").prepend(noticeHtml);
+                }
+            }
+        }
+    }
+    autofillBookingForm();
+
     function validateBookingStep1() {
         nameError.textContent = "";
         emailError.textContent = "";
@@ -277,7 +307,10 @@ if (form) {
         nameError.textContent = "";
         emailError.textContent = "";
         formStatus.textContent = "";
-        setTimeout(updateBookingTimeInfo, 0);
+        setTimeout(function () {
+            updateBookingTimeInfo();
+            autofillBookingForm();
+        }, 0);
     });
 }
 //pop-up subscription form
@@ -286,6 +319,27 @@ const subscriptionForm = document.getElementById("subscription-form");
 if (subscriptionForm) {
     const subscriptionName = document.getElementById("subscription-name");
     const subscriptionEmail = document.getElementById("subscription-email");
+
+    // Auto-fill subscription form with current user details if logged in
+    function autofillSubscriptionForm() {
+        if (localStorage.getItem("isLoggedIn") === "true") {
+            const currentUsername = localStorage.getItem("currentUser");
+            if (currentUsername) {
+                let profileData = null;
+                try {
+                    profileData = JSON.parse(localStorage.getItem("user_" + currentUsername.toLowerCase()));
+                } catch (e) {}
+
+                if (subscriptionName && !subscriptionName.value) {
+                    subscriptionName.value = profileData && profileData.fullName ? profileData.fullName : currentUsername;
+                }
+                if (subscriptionEmail && !subscriptionEmail.value) {
+                    subscriptionEmail.value = profileData && profileData.email ? profileData.email : "";
+                }
+            }
+        }
+    }
+    autofillSubscriptionForm();
     const subscriptionPassword = document.getElementById("subscription-password");
     const confirmPassword = document.getElementById("subscription-confirm-password");
     const subscriptionNameError = document.getElementById("subscription-name-error");
